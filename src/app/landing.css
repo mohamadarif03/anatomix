@@ -209,6 +209,23 @@
       background: rgba(255,255,255,.58);
     }
 
+    /* Header Actions Container */
+    .header-actions {
+      position: absolute;
+      right: calc(var(--fx) + 43px);
+      top: 17px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 25;
+    }
+
+    .header-actions .join {
+      position: relative;
+      right: auto;
+      top: auto;
+    }
+
     /* Join button */
     .join {
       position: absolute;
@@ -1091,7 +1108,7 @@
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
        8. RESPONSIVE â€” TIER C (@media max-width:520px and portrait)
        â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-    @media (max-width: 520px) and (orientation: portrait) {
+    @media (max-width: 1024px) {
       .landing-scope {
         height: auto;
         min-height: 100%;
@@ -1102,8 +1119,10 @@
       .viewport {
         position: relative;
         inset: auto;
+        height: auto;
         min-height: 100svh;
         overflow: visible;
+        padding-bottom: 2rem;
       }
 
       .stage.is-phone {
@@ -1111,12 +1130,14 @@
         left: auto;
         top: auto;
         width: 100%;
+        max-width: 680px;
+        margin: 0 auto;
         height: auto;
         min-height: 100svh;
         transform: none;
         background: transparent;
-        --gf: clamp(56px, 16.5vw, 84px);
-        --gm: clamp(112px, 33vw, 186px);
+        --gf: clamp(44px, 13vw, 72px);
+        --gm: clamp(70px, 20vw, 120px);
         display: grid;
         grid-template-columns: 1fr auto;
         grid-template-areas:
@@ -1129,9 +1150,9 @@
           "card card"
           "soc soc";
         align-content: start;
-        row-gap: clamp(14px, 4vw, 22px);
-        column-gap: 16px;
-        padding: 0 clamp(16px, 5vw, 24px) clamp(22px, 6vw, 32px);
+        row-gap: clamp(10px, 3vw, 16px);
+        column-gap: 12px;
+        padding: 0 clamp(14px, 4.5vw, 24px) clamp(20px, 5.5vw, 36px);
       }
 
       .stage.is-phone > * {
@@ -1140,116 +1161,318 @@
         margin: 0;
       }
 
+      /* Navbar - Mobile & Tablet Responsive */
       .is-phone .header {
-        flex-wrap: wrap;
         grid-area: head;
         position: relative;
+        width: 100%;
         height: auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: clamp(14px, 4vw, 20px) 0 0;
-      }
-
-      .is-phone .nav {
-        position: static;
-        transform: none;
-        margin: 10px auto 0;
-        width: max-content;
-        max-width: 100%;
-        display: flex;
-        justify-content: center;
+        padding: clamp(12px, 3.5vw, 20px) 0 4px;
+        z-index: 50;
       }
 
       .is-phone .brand {
         position: static;
-        height: 34px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+      }
+
+      .is-phone .nav {
+        display: none !important;
+      }
+
+      .is-phone .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        position: static;
+      }
+
+      .is-phone .join {
+        position: static;
+        width: auto;
+        height: 36px;
+        padding: 2px 14px 2px 4px;
+        border-radius: 20px;
+        background: rgba(246, 250, 255, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 2px 8px rgba(6, 25, 47, 0.08);
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      .is-phone .join-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .is-phone .join-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .is-phone .join-label {
+        font-size: 13px;
+        margin-left: 6px;
+        font-weight: 600;
+        color: #06192f;
+      }
+
+      @media (max-width: 380px) {
+        .is-phone .join-label {
+          display: none;
+        }
+        .is-phone .join {
+          padding: 0;
+          width: 36px;
+          height: 36px;
+          justify-content: center;
+        }
       }
 
       .is-phone .menu {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 2px 8px rgba(6, 25, 47, 0.08);
+        cursor: pointer;
         position: relative;
-        left: auto;
-        top: auto;
-        width: 45px;
-        height: 19px;
+        flex-shrink: 0;
+        padding: 0;
       }
 
-      .is-phone .menu::after {
-        content: "";
+      .is-phone .menu span {
         position: absolute;
-        inset: -13px -4px;
+        left: 9px;
+        width: 18px;
+        height: 2px;
+        background: var(--ink);
+        border-radius: 2px;
+        transition: transform .25s ease, opacity .25s ease;
+      }
+
+      .is-phone .menu span:nth-child(1) { top: 11px; }
+      .is-phone .menu span:nth-child(2) { top: 17px; }
+      .is-phone .menu span:nth-child(3) { top: 23px; }
+
+      .stage.menu-open .is-phone .menu span:nth-child(1),
+      .is-phone .menu.active span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+      .stage.menu-open .is-phone .menu span:nth-child(2),
+      .is-phone .menu.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .stage.menu-open .is-phone .menu span:nth-child(3),
+      .is-phone .menu.active span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
       }
 
       .is-phone .menu-panel {
         position: absolute;
         left: 0;
         right: 0;
-        top: calc(100% + 12px);
-        width: auto;
+        top: calc(100% + 8px);
+        width: 100%;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        border-radius: 20px;
+        padding: 12px;
+        box-shadow: 0 16px 40px rgba(6, 25, 47, 0.16);
+        z-index: 99;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity .22s ease, transform .25s ease, visibility .25s ease;
       }
 
+      .stage.menu-open .is-phone .menu-panel,
+      .stage.menu-open .menu-panel {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .is-phone .menu-panel a {
+        height: 46px;
+        padding: 0 16px;
+        border-radius: 14px;
+        font-size: 14.5px;
+        font-weight: 600;
+        color: #06192f;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: background .15s ease, color .15s ease;
+      }
+
+      .is-phone .menu-panel a:hover,
+      .is-phone .menu-panel a.active {
+        background: rgba(214, 230, 245, 0.7);
+        color: #1169dc;
+      }
+
+      .is-phone .menu-join {
+        width: 100%;
+        height: 46px;
+        margin-top: 6px;
+        border-radius: 23px;
+        background: var(--ink);
+        color: #ffffff !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(6, 25, 47, 0.2);
+        transition: transform .15s ease, opacity .15s ease;
+      }
+
+      .is-phone .menu-join:hover {
+        opacity: 0.95;
+        transform: scale(1.01);
+      }
+
+      .is-phone .menu-join .join-icon {
+        width: 28px;
+        height: 28px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+      }
+
+      .is-phone .menu-join .join-icon svg circle,
+      .is-phone .menu-join .join-icon svg path {
+        stroke: #ffffff;
+      }
+
+      .is-phone .menu-join .join-label {
+        color: #ffffff;
+        font-size: 14px;
+        margin-left: 0;
+      }
+
+      /* Headline */
       .is-phone .headline {
         grid-area: title;
-        position: static;
-        width: auto;
-        font-size: clamp(24px, 7.3vw, 38px);
-        line-height: 1.1;
-        margin-top: clamp(4px, 2vw, 10px);
+        position: relative;
+        width: 100%;
+        font-size: clamp(22px, 6.2vw, 36px);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        margin-top: clamp(6px, 2vw, 12px);
       }
 
       .is-phone .headline-line {
         white-space: normal;
+        display: block;
       }
 
       .is-phone .headline-line2 {
-        display: block;
-        gap: 0;
-        margin-top: .04em;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 4px;
       }
 
       .is-phone .chain {
         display: inline-block;
-        vertical-align: -.055em;
-        margin-right: .2em;
-        width: 1.9114em;
-        height: .6076em;
+        width: clamp(56px, 15vw, 84px);
+        height: auto;
+        aspect-ratio: 151 / 48;
+        flex-shrink: 0;
       }
 
+      /* Creator & Features */
       .is-phone .creator {
         grid-area: creator;
-        position: static;
-        align-self: start;
+        position: relative;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
       .is-phone .creator .verified {
-        width: 17px;
-        height: 17px;
+        width: 18px;
+        height: 18px;
       }
 
       .is-phone .creator-copy {
-        font-size: 13px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #06192f;
+        line-height: 1.2;
       }
 
       .is-phone .creator-copy .series {
-        font-size: 12px;
-        margin-top: 6px;
+        font-size: 11px;
+        font-weight: 500;
+        color: #77899c;
+        margin-top: 2px;
       }
 
       .is-phone .features {
         grid-area: features;
-        position: static;
-        font-size: 13px;
-        gap: 7px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         justify-self: end;
-        align-self: start;
+        align-self: center;
         width: auto;
+        font-size: 12px;
       }
 
       .is-phone .feature {
-        gap: 12px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: #475569;
+        font-weight: 500;
       }
 
-      /* Phone Art Layer: grid-area: art */
+      .is-phone .feature b {
+        color: #1169dc;
+        font-weight: 700;
+      }
+
+      @media (max-width: 380px) {
+        .is-phone .features {
+          gap: 6px;
+          font-size: 11px;
+        }
+        .is-phone .creator-copy {
+          font-size: 11.5px;
+        }
+      }
+
+      /* 3D Hero Art & Ghost Layer */
       .is-phone .hero {
         grid-area: art;
         position: relative;
@@ -1257,18 +1480,23 @@
         top: auto;
         width: 100%;
         height: auto;
-        max-width: 430px;
+        max-width: 320px;
         justify-self: center;
         align-self: center;
         aspect-ratio: 600 / 759;
+        margin: 4px auto;
       }
 
       .is-phone .hero img {
         height: auto;
+        width: 100%;
       }
 
       .is-phone .ghost {
         letter-spacing: -.0476em;
+        pointer-events: none;
+        user-select: none;
+        opacity: 0.16;
       }
 
       .is-phone .o-gap {
@@ -1295,7 +1523,7 @@
         font-size: calc(var(--gf) * .87);
         justify-self: end;
         align-self: end;
-        margin-bottom: clamp(24px, 8vw, 52px);
+        margin-bottom: clamp(14px, 5vw, 36px);
       }
 
       .is-phone .robo-o-avatar {
@@ -1323,78 +1551,129 @@
         object-position: center 12%;
       }
 
+      /* Button Lapisan Jaringan - Sleek & Compact on Mobile */
       .is-phone .material {
         grid-area: mat;
-        position: static;
+        position: relative;
         width: 100%;
+        max-width: 280px;
         height: auto;
-        margin-top: clamp(30px, 10vw, 56px);
+        margin: 4px auto 0;
+        z-index: 10;
       }
 
       .is-phone .material-pill {
         position: relative;
         width: 100%;
-        height: clamp(64px, 18vw, 76px);
-        right: auto;
-        bottom: auto;
+        height: 48px;
+        border-radius: 24px;
+        background: var(--ink);
+        display: flex;
+        align-items: center;
+        padding: 0 5px;
+        box-shadow: 0 6px 18px rgba(6, 25, 47, 0.16);
+        overflow: hidden;
       }
 
       .is-phone .material-thumb {
-        width: clamp(96px, 28vw, 126px);
-        height: clamp(122px, 36vw, 161px);
-        bottom: 0;
+        position: relative;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+        left: auto;
+        bottom: auto;
+        background: rgba(255, 255, 255, 0.1);
       }
 
       .is-phone .material-thumb img {
-        left: 4px;
-        top: 10px;
-        width: clamp(52px, 15vw, 64px);
-        height: clamp(52px, 15vw, 64px);
+        position: static;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        border-radius: 18px;
+        border-radius: 50%;
+        filter: none;
       }
 
       .is-phone .material-copy {
-        margin-left: clamp(102px, 30vw, 134px);
+        margin-left: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 1.2;
         width: auto;
-        font-size: clamp(14px, 4vw, 16px);
+        white-space: nowrap;
       }
 
       .is-phone .material-next {
-        width: clamp(48px, 14vw, 58px);
-        height: clamp(48px, 14vw, 58px);
-        margin-right: 6px;
+        margin-left: auto;
+        margin-right: 2px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #f5f9fc;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: transform .2s ease, background .2s ease;
       }
 
+      .is-phone .material-next:hover,
+      .is-phone .material-next:active {
+        transform: scale(1.08);
+        background: #ffffff;
+      }
+
+      .is-phone .material-next svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      /* Gallery Avatars */
       .is-phone .gallery {
         grid-area: gal;
-        position: static;
+        position: relative;
         inset: auto;
         width: 100%;
+        max-width: 320px;
+        margin: 4px auto 0;
         height: auto;
         display: flex;
-        gap: clamp(6px, 2.2vw, 12px);
-        justify-content: space-between;
+        gap: 8px;
+        justify-content: center;
       }
 
       .is-phone .avatar {
         position: static !important;
         inset: auto !important;
-        width: auto;
-        height: auto;
-        flex: 1 1 0;
-        min-width: 0;
-        aspect-ratio: 1;
-        border-width: clamp(3px, 1.2vw, 5px);
+        width: 46px !important;
+        height: 46px !important;
+        flex: 0 0 46px;
+        border-radius: 50%;
+        border-width: 3px;
+        overflow: hidden;
       }
 
+      /* Glass Card */
       .is-phone .glass-card {
         grid-area: card;
-        position: static;
+        position: relative;
         inset: auto;
-        width: auto;
+        width: 100%;
+        max-width: 360px;
+        margin: 4px auto 0;
         height: auto;
-        padding: 14px 20px 20px;
+        padding: 14px 18px 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 10px 30px rgba(6, 25, 47, 0.08);
       }
 
       .is-phone .card-top {
@@ -1403,72 +1682,76 @@
       }
 
       .is-phone .count {
-        margin-left: -14px;
+        margin-left: 0;
         min-width: 0;
-        padding: 8px 18px 7px;
+        padding: 6px 14px;
+        font-size: 13px;
       }
 
       .is-phone .eye {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
         margin: 0;
       }
 
       .is-phone .card-copy {
-        margin-top: clamp(12px, 4vw, 16px);
-        font-size: clamp(14px, 4.1vw, 16px);
+        margin-top: 10px;
+        font-size: 13.5px;
+        line-height: 1.35;
         max-width: none;
       }
 
       .is-phone .card-bottom {
         position: static;
         height: auto;
-        margin-top: clamp(14px, 4.5vw, 20px);
+        margin-top: 12px;
         width: auto;
       }
 
       .is-phone .start {
-        font-size: clamp(13px, 3.8vw, 15px);
+        font-size: 12.5px;
         line-height: 1.2;
       }
 
       .is-phone .start strong {
-        font-size: clamp(16px, 4.6vw, 19px);
+        font-size: 16px;
       }
 
       .is-phone .shuffle {
-        width: 40px;
-        height: 40px;
-        margin-right: clamp(10px, 4vw, 18px);
+        width: 38px;
+        height: 38px;
+        margin-right: 10px;
       }
 
       .is-phone .play {
-        width: clamp(48px, 14vw, 56px);
-        height: clamp(48px, 14vw, 56px);
+        width: 44px;
+        height: 44px;
       }
 
+      /* Socials & Toast */
       .is-phone .socials {
         grid-area: soc;
-        position: static;
+        position: relative;
         display: flex;
-        gap: clamp(12px, 4vw, 17px);
+        justify-content: center;
+        gap: 12px;
+        margin-top: 4px;
       }
 
       .is-phone .social {
-        width: 44px;
-        height: 44px;
+        width: 38px;
+        height: 38px;
       }
 
       .is-phone .toast {
         position: fixed;
         left: 50%;
         top: auto;
-        bottom: clamp(18px, 5vw, 26px);
+        bottom: 20px;
+        transform: translateX(-50%);
       }
     }
-  
 
-    
 /* =========================================================================
    CARA BELAJAR COMPLETE STYLES (Exact match with test/index.html)
    ========================================================================= */

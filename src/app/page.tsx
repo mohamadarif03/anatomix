@@ -558,7 +558,7 @@ export default function LandingPage() {
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
-    const PHONE = window.matchMedia("(max-width:520px) and (orientation:portrait)");
+    const PHONE = window.matchMedia("(max-width: 1024px)");
 
     function layout() {
       if (!stage) return;
@@ -913,7 +913,9 @@ export default function LandingPage() {
               ))}
             </nav>
 
-            <a href="/beranda" className="join" aria-label="Masuk ke aplikasi PRIMA">
+            {/* Navigation Header Actions */}
+            <div className="header-actions">
+              <a href="/beranda" className="join" aria-label="Masuk ke aplikasi PRIMA">
               <span className="join-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="22" height="22">
                   <circle
@@ -938,6 +940,19 @@ export default function LandingPage() {
               </span>
               <span className="join-label">Masuk Aplikasi</span>
             </a>
+
+              <button
+                type="button"
+                className={`menu ${isMenuOpen ? "active" : ""}`}
+                aria-label={isMenuOpen ? "Tutup menu navigasi" : "Buka menu navigasi"}
+                aria-expanded={isMenuOpen}
+                onClick={toggleMenu}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
 
             {/* Menu panel (for compact / mobile navigation) */}
             <div
@@ -1190,6 +1205,7 @@ export default function LandingPage() {
                 className="material-next"
                 type="button"
                 aria-label="Ganti lapisan jaringan"
+                data-material-next="true"
                 onClick={() => chooseSystem(currentIndex + 1)}
               >
                 <svg
