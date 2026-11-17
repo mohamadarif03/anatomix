@@ -262,3 +262,16 @@ html.dark select {
 .treemap-cell:hover {
   opacity: 0.95;
 }
+
+/* Background pattern untuk Hero Mobile (mengadaptasi index.html) */
+.mobile-hero-pattern {
+  background: linear-gradient(135deg, #1a66ff 0%, #0f4cd6 100%);
+  background-image:
+    radial-gradient(circle at 85% 50%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 28%, transparent 28%),
+    radial-gradient(circle at 12% 75%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.06) 22%, transparent 22%),
+    linear-gradient(135deg, #1a66ff 0%, #0f4cd6 100%);
+}
+
+.chart-grid-line {
+  border-bottom: 1px dashed #f1f5f9;
+}

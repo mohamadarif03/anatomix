@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIMA - Beranda Belajar Anatomi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Background pattern untuk Hero Mobile (mengadaptasi gaya foto pertama dengan warna biru PRIMA) */
+        .mobile-hero-pattern {
+            background: linear-gradient(135deg, #1A66FF 0%, #0F4CD6 100%);
+            background-image: 
+                radial-gradient(circle at 85% 50%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 28%, transparent 28%),
+                radial-gradient(circle at 12% 75%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.06) 22%, transparent 22%),
+                linear-gradient(135deg, #1A66FF 0%, #0F4CD6 100%);
+        }
+        /* Garis bantu horizontal pada grafik batang */
+        .chart-grid-line {
+            border-bottom: 1px dashed #f1f5f9;
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-800 antialiased selection:bg-[#1A66FF] selection:text-white">
+
+    <!-- =========================================================================
+         1. TAMPILAN DESKTOP (>= 768px) - SAMA PERSIS DENGAN SCREENSHOT PRIMA
+         ========================================================================= -->
+    <div class="hidden md:flex flex-col min-h-screen">
+
+        <!-- TOP NAVBAR DESKTOP -->
+        <header class="h-16 bg-white border-b border-slate-200/80 px-6 flex items-center justify-between sticky top-0 z-30 select-none">
+            <!-- Left: Brand Logo & Hamburger -->
+            <div class="flex items-center gap-7">
+                <a href="#" class="flex items-center gap-2.5">
+                    <!-- Custom 3D Cube / P Logo mirip PRIMA -->
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#0B2559] via-[#1A66FF] to-[#38BDF8] flex items-center justify-center text-white font-extrabold text-lg shadow-xs">
+                        P
+                    </div>
+                    <span class="font-extrabold text-[19px] tracking-tight text-[#0F172A]">PRIMA</span>
+                </a>
+                <button class="text-slate-500 hover:text-slate-800 transition p-1">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Center: Search Bar (Ctrl+K) -->
+            <div class="w-[420px] relative">
+                <input type="text" placeholder="Cari materi anatomi... (Ctrl+K)" 
+                    class="w-full bg-[#F1F5F9] hover:bg-slate-200/60 focus:bg-white text-slate-700 placeholder-slate-400 text-[13px] rounded-xl py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#1A66FF]/20 border border-transparent focus:border-[#1A66FF]/40 transition" />
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2"></i>
+            </div>
+
+            <!-- Right: Utility Icons & User Profile -->
+            <div class="flex items-center gap-3">
+                <button class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition" title="Mode Terang/Gelap">
+                    <i data-lucide="sun" class="w-[18px] h-[18px]"></i>
+                </button>
+                <button class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition" title="Layar Penuh">
+                    <i data-lucide="maximize-2" class="w-[17px] h-[17px]"></i>
+                </button>
+                <button class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition relative" title="Notifikasi">
+                    <i data-lucide="bell" class="w-[18px] h-[18px]"></i>
+                    <span class="px-1 min-w-[16px] h-4 bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center absolute top-1 right-0.5 border border-white">
+                        3
+                    </span>
+                </button>
+
+                <div class="h-6 w-[1px] bg-slate-200 mx-1"></div>
+
+                <!-- User Dropdown -->
+                <button class="flex items-center gap-2.5 py-1 px-2 rounded-xl hover:bg-slate-50 transition">
+                    <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center">
+                        <i data-lucide="user-circle" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-[13px] font-bold text-slate-800">dr. Rina Safitri (Kandidat)</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- BODY WRAPPER (SIDEBAR + MAIN CONTENT) -->
+        <div class="flex-1 flex min-w-0">
+
+            <!-- SIDEBAR KIRI -->
+            <aside class="w-[235px] bg-white border-r border-slate-200/80 flex flex-col justify-between shrink-0 py-5 px-3.5 select-none">
+                <div class="space-y-6">
+                    <!-- Grup 1: MENU PRIMA -->
+                    <div>
+                        <p class="px-3 text-[10.5px] font-bold text-slate-400 uppercase tracking-wider mb-2">MENU PRIMA</p>
+                        <nav class="space-y-1">
+                            <!-- Beranda (Active) -->
+                            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#F1F5F9] text-slate-900 font-bold text-[13px] transition">
+                                <i data-lucide="gauge" class="w-[18px] h-[18px] text-slate-800"></i>
+                                <span>Beranda</span>
+                            </a>
+
+                            <!-- Anatomi 3D -->
+                            <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-[13px] transition">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="box" class="w-[18px] h-[18px] text-slate-500"></i>
+                                    <span>Anatomi 3D</span>
+                                </div>
+                                <span class="bg-[#1A66FF] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">3D</span>
+                            </a>
+
+                            <!-- Rencana Belajar -->
+                            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-[13px] transition">
+                                <i data-lucide="calendar" class="w-[18px] h-[18px] text-slate-500"></i>
+                                <span>Rencana Belajar</span>
+                            </a>
+
+                            <!-- Materi -->
+                            <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-[13px] transition">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="file-text" class="w-[18px] h-[18px] text-slate-500"></i>
+                                    <span>Materi</span>
+                                </div>
+                                <span class="bg-[#1A66FF] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">AI</span>
+                            </a>
+
+                            <!-- Latihan Soal -->
+                            <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-[13px] transition">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="list-checks" class="w-[18px] h-[18px] text-slate-500"></i>
+                                    <span>Latihan Soal</span>
+                                </div>
+                                <span class="bg-[#1A66FF] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">AI</span>
+                            </a>
+
+                            <!-- Flashcard -->
+                            <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-[13px] transition">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="credit-card" class="w-[18px] h-[18px] text-slate-500"></i>
+                                    <span>Flashcard</span>
+                                </div>
+                                <span class="bg-[#16A34A] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">AI</span>
+                            </a>
+
+                            <!-- Peta Kelemahan -->
+                            <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-[13px] transition">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="line-chart" class="w-[18px] h-[18px] text-slate-500 shrink-0"></i>
+                                    <span class="leading-tight">Peta<br>Kelemahan</span>
+                                </div>
+                                <span class="bg-[#D97706] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">Adaptif</span>
+                            </a>
+                        </nav>
+                    </div>
+
+                    <!-- Grup 2: PENGATURAN -->
+                    <div>
+                        <p class="px-3 text-[10.5px] font-bold text-slate-400 uppercase tracking-wider mb-2">PENGATURAN</p>
+                        <nav class="space-y-1">
+                            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-[13px] transition">
+                                <i data-lucide="settings" class="w-[18px] h-[18px] text-slate-500"></i>
+                                <span>Pengaturan</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-[13px] transition">
+                                <i data-lucide="wand-2" class="w-[18px] h-[18px] text-slate-500"></i>
+                                <span>Ulangi Onboarding</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-[13px] transition">
+                                <i data-lucide="log-out" class="w-[18px] h-[18px] text-slate-500"></i>
+                                <span>Masuk / Keluar</span>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- KONTEN UTAMA DESKTOP -->
+            <main class="flex-1 p-7 max-w-[1400px] mx-auto space-y-5 overflow-x-hidden">
+
+                <!-- Baris Judul Beranda & Tombol Aksi Kanan -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-[22px] font-extrabold text-slate-900 leading-tight">Beranda</h1>
+                        <p class="text-[13px] text-slate-500 mt-0.5">
+                            Selamat datang kembali, <strong class="text-slate-800 font-bold">dr. Rina Safitri (Kandidat)</strong> · Ada <a href="#" class="text-[#1A66FF] font-semibold underline decoration-[#1A66FF]/40">16 item</a> yang perlu diulang hari ini
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-2.5">
+                        <button class="inline-flex items-center gap-2 bg-[#1A66FF] hover:bg-blue-700 text-white text-[13px] font-bold px-4 py-2.5 rounded-xl shadow-xs transition">
+                            <i data-lucide="play" class="w-3.5 h-3.5 fill-white"></i>
+                            <span>Mulai Latihan Soal</span>
+                        </button>
+                        <button class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/90 text-[13px] font-bold px-4 py-2.5 rounded-xl shadow-2xs transition">
+                            <i data-lucide="box" class="w-4 h-4 text-slate-600"></i>
+                            <span>Modul 3D</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4 KARTU STATISTIK ATAS -->
+                <div class="grid grid-cols-4 gap-4">
+                    
+                    <!-- Card 1: Jatuh Tempo Hari Ini -->
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200/75 shadow-[0_2px_6px_-3px_rgba(0,0,0,0.03)] flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-xl border border-slate-100 bg-red-50/50 text-red-500 flex items-center justify-center shrink-0">
+                            <i data-lucide="bell" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">JATUH TEMPO HARI INI</p>
+                            <p class="text-[23px] font-extrabold text-slate-900 leading-tight my-0.5">16 Item</p>
+                            <p class="text-xs text-slate-400">
+                                <span class="text-red-600 font-bold">4 item kritis</span> · perlu repetisi
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Rata-rata Penguasaan -->
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200/75 shadow-[0_2px_6px_-3px_rgba(0,0,0,0.03)] flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-xl border border-slate-100 bg-emerald-50/50 text-emerald-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="line-chart" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">RATA-RATA PENGUASAAN</p>
+                            <p class="text-[23px] font-extrabold text-slate-900 leading-tight my-0.5">74%</p>
+                            <p class="text-xs text-slate-400">
+                                <span class="text-emerald-600 font-bold">↑ +4.5%</span> dari minggu lalu
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Hari Beruntun -->
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200/75 shadow-[0_2px_6px_-3px_rgba(0,0,0,0.03)] flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-xl border border-slate-100 bg-amber-50/60 text-amber-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="flame" class="w-5 h-5 fill-amber-500"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">HARI BERUNTUN</p>
+                            <p class="text-[23px] font-extrabold text-slate-900 leading-tight my-0.5">5 Hari</p>
+                            <p class="text-xs text-slate-400">
+                                <span class="text-emerald-700 font-bold">Konsisten</span> · Rekor 8 hari
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Hitung Mundur Ujian -->
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200/75 shadow-[0_2px_6px_-3px_rgba(0,0,0,0.03)] flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-xl border border-slate-100 bg-teal-50/50 text-teal-700 flex items-center justify-center shrink-0">
+                            <i data-lucide="clock" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">HITUNG MUNDUR UJIAN</p>
+                            <p class="text-[23px] font-extrabold text-slate-900 leading-tight my-0.5">17 Hari</p>
+                            <div class="flex items-start gap-1.5 text-[11px] leading-tight mt-0.5">
+                                <span class="text-teal-700 font-bold shrink-0">20 Nov<br>2026</span>
+                                <span class="text-slate-400">· Blok Anatomi Kepala & Kranium</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BARIS TENGAH: GRAFIK BATANG (KIRI) & GRAFIK DONAT (KANAN) -->
+                <div class="grid grid-cols-12 gap-4">
+                    
+                    <!-- Kolom Kiri (8 cols): Progres Latihan Mingguan -->
+                    <div class="col-span-8 bg-white rounded-2xl p-6 border border-slate-200/75 shadow-[0_2px_6px_-3px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+                        <div>
+                            <!-- Header Card -->
+                            <div class="flex items-start justify-between mb-6">
+                                <div>
+                                    <h2 class="text-[15.5px] font-bold text-slate-900">Progres Latihan Mingguan</h2>
+                                    <p class="text-xs text-slate-500 mt-0.5">Jumlah item anatomi yang dilatih 7 hari terakhir (Target: 20 item/hari)</p>
+                                </div>
+                                <span class="bg-[#15803D] text-white text-[11px] font-bold px-3 py-1 rounded-md">
+                                    Target Tercapai 5/7 Hari
+                                </span>
+                            </div>
+
+                            <!-- Bar Chart Area -->
+                            <div class="relative h-[230px] pt-2 pb-6 pl-8 pr-2 flex flex-col justify-between select-none">
+                                <!-- Y-Axis Labels & Horizontal Grid Lines -->
+                                <div class="relative w-full h-full flex flex-col justify-between text-[11px] text-slate-400">
+                                    <div class="flex items-center w-full chart-grid-line pb-1">
+                                        <span class=" -ml-8 w-6 text-right">35</span>
+                                    </div>
+                                    <div class="flex items-center w-full chart-grid-line pb-1">
+                                        <span class="-ml-8 w-6 text-right">30</span>
+                                    </div>
+                                    <div class="flex items-center w-full chart-grid-line pb-1">
+                                        <span class="-ml-8 w-6 text-right">20</span>
+                                    </div>
+                                    <div class="flex items-center w-full chart-grid-line pb-1">
+                                        <span class="-ml-8 w-6 text-right">10</span>
+                                    </div>
+                                    <div class="flex items-center w-full border-b border-slate-200 pb-1">
+                                        <span class="-ml-8 w-6 text-right">0</span>
+                                    </div>
+                                </div>
+
+                                <!-- Bars Overlay -->
+                                <div class="absolute inset-x-8 bottom-6 top-3 flex items-end justify-around px-4">
+                                    <!-- Sen (18) -->
+                                    <div class="flex flex-col items-center w-12 h-full justify-end group">
+                                        <div class="w-9 bg-[#2563EB] rounded-t-md transition-all duration-300 group-hover:bg-blue-700" style="height: 52%;"></div>
+                                    </div>
+                                    <!-- Sel (25) -->
+                                    <div class="flex flex-col items-center w-12 h-full justify-end group">
+                                        <div class="w-9 bg-[#2563EB] rounded-t-md transition-all duration-300 group-hover:bg-blue-700" style="height: 72%;"></div>
+                                    </div>
+                                    <!-- Rab (22) -->
+                                    <div class="flex flex-col items-center w-12 h-full justify-end group">
+                                        <div class="w-9 bg-[#2563EB] rounded-t-md transition-all duration-300 group-hover:bg-blue-700" style="height: 63%;"></div>
+                                    </div>
+                                    <!-- Kam (28) -->
+                                    <div class="flex flex-col items-center w-12 h-full justify-end group">
+                                        <div class="w-9 bg-[#2563EB] rounded-t-md transition-all duration-300 group-hover:bg-blue-700" style="height: 80%;"></div>
+                                    </div>
+                                    <!-- Jum (15) -->
+                                    <div class="flex flex-col items-center w-12 h-full justify-end group">
+                                        <div class="w-9 bg-[#2563EB] rounded-t-md transition-all duration-300 group-hover:bg-blue-700" style="height: 43%;"></div>
+                                    </div>
+                                    <!-- Sab (34) -->
+                                    <div class="flex flex-col items-center w-12 h-full justify-end group">
+                                        <div class="w-9 bg-[#2563EB] rounded-t-md transition-all duration-300 group-hover:bg-blue-700" style="height: 96%;"></div>
+                                    </div>
+                                    <!-- Min (20) -->
+                                    <div class="flex flex-col items-center w-12 h-full justify-end group">
+                                        <div class="w-9 bg-[#2563EB] rounded-t-md transition-all duration-300 group-hover:bg-blue-700" style="height: 57%;"></div>
+                                    </div>
+                                </div>
+
+                                <!-- X-Axis Days -->
+                                <div class="absolute inset-x-8 bottom-0 flex items-center justify-around px-4 text-[11.5px] text-slate-500">
+                                    <span class="w-12 text-center">Sen</span>
+                                    <span class="w-12 text-center">Sel</span>
+                                    <span class="w-12 text-center">Rab</span>
+                                    <span class="w-12 text-center">Kam</span>
+                                    <span class="w-12 text-center">Jum</span>
+                                    <span class="w-12 text-center">Sab</span>
+                                    <span class="w-12 text-center">Min</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer Summary 3 Kolom -->
+                        <div class="grid grid-cols-3 border-t border-slate-100 pt-4 mt-4 text-center">
+                            <div>
+                                <p class="text-[11.5px] text-slate-400">Total Item Dilatih</p>
+                                <p class="text-[16px] font-extrabold text-slate-900 mt-0.5">142 Item</p>
+                            </div>
+                            <div>
+                                <p class="text-[11.5px] text-slate-400">Rata-rata Harian</p>
+                                <p class="text-[16px] font-extrabold text-[#1A66FF] mt-0.5">20.2 / hari</p>
+                            </div>
+                            <div>
+                                <p class="text-[11.5px] text-slate-400">Akurasi Rerata</p>
+                                <p class="text-[16px] font-extrabold text-[#15803D] mt-0.5">86% Benar</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom Kanan (4 cols): Distribusi Penguasaan Materi -->
+                    <div class="col-span-4 bg-white rounded-2xl p-6 border border-slate-200/75 shadow-[0_2px_6px_-3px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+                        <h2 class="text-[15.5px] font-bold text-slate-900">Distribusi Penguasaan Materi</h2>
+
+                        <!-- SVG Donut Chart (4 Segmen: 42% Hijau, 28% Teal, 18% Amber, 12% Merah) -->
+                        <div class="relative w-48 h-48 mx-auto my-4 flex items-center justify-center">
+                            <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                                <!-- Background Ring -->
+                                <circle cx="18" cy="18" r="14" fill="transparent" stroke="#f1f5f9" stroke-width="5"></circle>
+                                <!-- Segmen 1: Dikuasai 42% (Hijau #15803D) -> 42% dari 88 = 36.9 -->
+                                <circle cx="18" cy="18" r="14" fill="transparent" stroke="#15803D" stroke-width="5" stroke-dasharray="36.5 88" stroke-dashoffset="0"></circle>
+                                <!-- Segmen 2: Cukup Baik 28% (Teal #0E7490) -> 28% dari 88 = 24.6 -->
+                                <circle cx="18" cy="18" r="14" fill="transparent" stroke="#0E7490" stroke-width="5" stroke-dasharray="24.2 88" stroke-dashoffset="-37"></circle>
+                                <!-- Segmen 3: Perlu Latihan 18% (Amber #B45309) -> 18% dari 88 = 15.8 -->
+                                <circle cx="18" cy="18" r="14" fill="transparent" stroke="#CA8A04" stroke-width="5" stroke-dasharray="15.4 88" stroke-dashoffset="-61.7"></circle>
+                                <!-- Segmen 4: Kritis 12% (Merah #DC2626) -> 12% dari 88 = 10.5 -->
+                                <circle cx="18" cy="18" r="14" fill="transparent" stroke="#DC2626" stroke-width="5" stroke-dasharray="10 88" stroke-dashoffset="-77.6"></circle>
+                            </svg>
+                            <!-- Teks Tengah Donat -->
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                                <span class="text-[11px] text-slate-400 font-medium">Rata-rata</span>
+                                <span class="text-2xl font-extrabold text-slate-900 leading-tight">68%</span>
+                            </div>
+                        </div>
+
+                        <!-- Legend 2x2 -->
+                        <div class="grid grid-cols-2 gap-y-2.5 gap-x-2 text-xs text-slate-600 pt-2">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#15803D] shrink-0"></span>
+                                <span>Dikuasai (42%)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#0E7490] shrink-0"></span>
+                                <span>Cukup Baik (28%)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#CA8A04] shrink-0"></span>
+                                <span>Perlu Latihan (18%)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#DC2626] shrink-0"></span>
+                                <span>Kritis (12%)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BARIS BAWAH: PETA KELEMAHAN TOPIK ANATOMI -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200/75 shadow-[0_2px_6px_-3px_rgba(0,0,0,0.03)]">
+                    <div class="flex items-center justify-between mb-5">
+                        <div>
+                            <h2 class="text-[15.5px] font-bold text-slate-900">Peta Kelemahan Topik Anatomi</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Silabus 3 Modul Praktikum (Muskuloskeletal, Respirasi, Kardiovaskuler) · Diurutkan dari topik yang paling kritis</p>
+                        </div>
+                        <a href="#" class="text-xs font-bold text-[#1A66FF] hover:underline flex items-center gap-1">
+                            <span>Lihat Analisis Detail</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+
+                    <!-- Tabel Daftar Topik -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-100 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                                    <th class="py-3 pr-4">TOPIK ANATOMI</th>
+                                    <th class="py-3 px-4">SISTEM</th>
+                                    <th class="py-3 px-4">PENGUASAAN</th>
+                                    <th class="py-3 px-4">STATUS</th>
+                                    <th class="py-3 pl-4 text-right">AKSI</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-[13px]">
+                                <!-- Baris 1 -->
+                                <tr class="hover:bg-slate-50/60 transition">
+                                    <td class="py-3.5 pr-4 font-bold text-slate-800">Foramina Basis Cranii & Nervus Cranialis</td>
+                                    <td class="py-3.5 px-4 text-slate-500">Muskuloskeletal</td>
+                                    <td class="py-3.5 px-4 font-bold text-red-600">38%</td>
+                                    <td class="py-3.5 px-4">
+                                        <span class="px-2.5 py-0.5 rounded-full bg-red-50 text-red-600 text-[11px] font-bold">Kritis</span>
+                                    </td>
+                                    <td class="py-3.5 pl-4 text-right">
+                                        <a href="#" class="text-[#1A66FF] font-bold text-xs hover:underline">Latih Sekarang →</a>
+                                    </td>
+                                </tr>
+                                <!-- Baris 2 -->
+                                <tr class="hover:bg-slate-50/60 transition">
+                                    <td class="py-3.5 pr-4 font-bold text-slate-800">Vaskularisasi Koroner & Katup Jantung</td>
+                                    <td class="py-3.5 px-4 text-slate-500">Kardiovaskuler</td>
+                                    <td class="py-3.5 px-4 font-bold text-amber-600">54%</td>
+                                    <td class="py-3.5 px-4">
+                                        <span class="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 text-[11px] font-bold">Perlu Latihan</span>
+                                    </td>
+                                    <td class="py-3.5 pl-4 text-right">
+                                        <a href="#" class="text-[#1A66FF] font-bold text-xs hover:underline">Buka Flashcard →</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+
+    <!-- =========================================================================
+         2. TAMPILAN MOBILE (< 768px) - KONSEP PERSIS SEPERTI FOTO MOBILE PERTAMA
+         ========================================================================= -->
+    <div class="md:hidden min-h-screen flex flex-col bg-[#F5F7FB] pb-28">
+
+        <!-- HERO BLUE SECTION (Mirip bagian atas biru di foto pertama) -->
+        <div class="mobile-hero-pattern text-white pt-6 pb-20 px-5 relative overflow-hidden">
+            
+            <!-- Ornamen Background Samar -->
+            <i data-lucide="box" class="w-36 h-36 text-white/5 absolute -bottom-6 left-4 pointer-events-none"></i>
+            <i data-lucide="line-chart" class="w-40 h-40 text-white/5 absolute top-12 -right-8 pointer-events-none"></i>
+            <i data-lucide="flame" class="w-16 h-16 text-white/5 absolute bottom-6 left-1/3 pointer-events-none"></i>
+
+            <!-- Top Bar: Ikon Streak/Trophy, Search Bar Transparan, Ikon Bell (3) -->
+            <div class="flex items-center justify-between gap-3 mb-7 relative z-10">
+                <button class="text-white hover:opacity-80 transition flex items-center gap-1" title="5 Hari Beruntun">
+                    <i data-lucide="trophy" class="w-6 h-6 fill-white/90"></i>
+                </button>
+                <div class="flex-1 relative">
+                    <i data-lucide="search" class="w-4 h-4 text-white/80 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" placeholder='Cari "Materi Anatomi"' 
+                        class="w-full bg-white/25 text-white placeholder-white/80 rounded-full py-2 pl-10 pr-4 text-xs focus:outline-none focus:bg-white/30 backdrop-blur-sm" />
+                </div>
+                <button class="text-white hover:opacity-80 transition relative" title="16 Item Jatuh Tempo">
+                    <i data-lucide="bell" class="w-6 h-6 fill-white/90"></i>
+                    <span class="w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center absolute -top-1 -right-1 border border-white">
+                        3
+                    </span>
+                </button>
+            </div>
+
+            <!-- Info Penguasaan Tengah (Mengadaptasi bagian $20,000 Available Balance) -->
+            <div class="text-center relative z-10 my-1">
+                <!-- Pill Kandidat Dokter -->
+                <button class="inline-flex items-center gap-1.5 text-xs text-white/95 font-medium mb-1.5 bg-white/15 px-3 py-1 rounded-full backdrop-blur-sm">
+                    <span>🩺</span>
+                    <span>dr. Rina Safitri • H-17 Ujian</span>
+                    <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Angka Utama: Rata-rata Penguasaan -->
+                <h1 class="text-4xl font-extrabold tracking-tight mb-1">74%</h1>
+                <p class="text-xs text-white/85 font-normal mb-5">Rata-Rata Penguasaan • <span class="font-semibold underline">16 Item Hari Ini</span></p>
+
+                <!-- Tombol Kapsul Utama (Mirip tombol Add Money) -->
+                <button class="inline-flex items-center gap-2 border border-white/85 hover:bg-white hover:text-[#1A66FF] text-white text-xs font-semibold py-2.5 px-6 rounded-full transition duration-200 shadow-sm">
+                    <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+                    <span>Mulai Latihan Soal</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- OVERLAPPING CARD 3 KOLOM (Mirip kartu Send, Request, Bank di foto pertama) -->
+        <div class="px-5 -mt-12 relative z-20">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 py-4 px-2 grid grid-cols-3 divide-x divide-slate-200/70">
+                
+                <!-- Aksi 1: Anatomi 3D -->
+                <button class="flex flex-col items-center justify-center gap-1.5 group py-1">
+                    <div class="w-11 h-11 rounded-full bg-[#1A66FF] text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition">
+                        <i data-lucide="box" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-xs text-slate-600 font-medium">Anatomi 3D</span>
+                </button>
+
+                <!-- Aksi 2: Flashcard AI -->
+                <button class="flex flex-col items-center justify-center gap-1.5 group py-1">
+                    <div class="w-11 h-11 rounded-full bg-[#16A34A] text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition">
+                        <i data-lucide="credit-card" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-xs text-slate-600 font-medium">Flashcard AI</span>
+                </button>
+
+                <!-- Aksi 3: Peta Adaptif -->
+                <button class="flex flex-col items-center justify-center gap-1.5 group py-1">
+                    <div class="w-11 h-11 rounded-full bg-amber-50 text-[#D97706] flex items-center justify-center group-hover:scale-105 transition">
+                        <i data-lucide="flame" class="w-5 h-5 fill-amber-500"></i>
+                    </div>
+                    <span class="text-xs text-slate-600 font-medium">5 Hari Streak</span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- DAFTAR PENGUASAAN & KELEMAHAN MATERI (Mirip List Transaction di foto pertama) -->
+        <div class="px-5 mt-6">
+            <!-- Header Section -->
+            <div class="flex items-center justify-between mb-3.5">
+                <div>
+                    <h2 class="text-[17px] font-bold text-slate-800">Distribusi & Evaluasi</h2>
+                    <p class="text-[11px] text-slate-400">142 item dilatih minggu ini (86% benar)</p>
+                </div>
+                <button class="text-slate-600 hover:text-[#1A66FF] transition">
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- List Card Putih (Persis gaya Spending, Income, Bills, Savings) -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 px-4 py-1.5 divide-y divide-slate-100">
+                
+                <!-- Item 1: Jatuh Tempo / Kritis (Mirip Spending -$500 warna merah) -->
+                <a href="#" class="flex items-center justify-between py-3.5">
+                    <div class="flex items-center gap-3.5 pr-2">
+                        <div class="w-11 h-11 rounded-full bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="bell" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-slate-700 text-xs block">Jatuh Tempo & Kritis</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">4 item kritis perlu repetisi</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <span class="font-bold text-red-600 text-xs">-16 Item</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+                    </div>
+                </a>
+
+                <!-- Item 2: Materi Dikuasai (Mirip Income $3000 warna hijau) -->
+                <a href="#" class="flex items-center justify-between py-3.5">
+                    <div class="flex items-center gap-3.5 pr-2">
+                        <div class="w-11 h-11 rounded-full bg-emerald-50 text-[#15803D] flex items-center justify-center shrink-0">
+                            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-slate-700 text-xs block">Materi Dikuasai</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">Target tercapai 5/7 hari</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <span class="font-bold text-[#15803D] text-xs">42%</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+                    </div>
+                </a>
+
+                <!-- Item 3: Perlu Latihan (Mirip Bills -$800) -->
+                <a href="#" class="flex items-center justify-between py-3.5">
+                    <div class="flex items-center gap-3.5 pr-2">
+                        <div class="w-11 h-11 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="line-chart" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-slate-700 text-xs block">Perlu Latihan Ulang</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">Muskuloskeletal & Koroner</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <span class="font-bold text-red-600 text-xs">18%</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+                    </div>
+                </a>
+
+                <!-- Item 4: Hitung Mundur Ujian (Mirip Savings $1000 warna oranye) -->
+                <a href="#" class="flex items-center justify-between py-3.5">
+                    <div class="flex items-center gap-3.5 pr-2">
+                        <div class="w-11 h-11 rounded-full bg-teal-50 text-teal-700 flex items-center justify-center shrink-0">
+                            <i data-lucide="clock" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-slate-700 text-xs block">Ujian Anatomi Kepala</span>
+                            <span class="text-[11px] text-slate-400 block mt-0.5">Jadwal: 20 Nov 2026</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <span class="font-bold text-amber-600 text-xs">17 Hari</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- FLOATING BOTTOM NAVIGATION BAR (Persis konsep foto pertama) -->
+        <div class="fixed bottom-4 left-5 right-5 z-30">
+            <nav class="bg-white rounded-2xl shadow-lg shadow-slate-300/50 border border-slate-100 px-3 py-2 flex items-center justify-around">
+                
+                <!-- Beranda (Active) -->
+                <a href="#" class="flex flex-col items-center justify-center py-1 px-3 text-[#1A66FF]">
+                    <i data-lucide="home" class="w-6 h-6 fill-[#1A66FF]"></i>
+                    <span class="w-1 h-1 rounded-full bg-[#1A66FF] mt-1"></span>
+                </a>
+
+                <!-- Peta Kelemahan / Analytics -->
+                <a href="#" class="flex flex-col items-center justify-center py-1 px-3 text-slate-700 hover:text-[#1A66FF] transition">
+                    <i data-lucide="pie-chart" class="w-6 h-6"></i>
+                </a>
+
+                <!-- Tombol Tengah Menonjol: Modul Anatomi 3D -->
+                <a href="#" class="w-12 h-12 rounded-xl bg-[#1A66FF] text-white flex items-center justify-center shadow-md shadow-blue-500/35 hover:bg-blue-700 transition" title="Buka Modul 3D">
+                    <i data-lucide="box" class="w-6 h-6"></i>
+                </a>
+
+                <!-- Latihan Soal / Materi AI -->
+                <a href="#" class="flex flex-col items-center justify-center py-1 px-3 text-slate-700 hover:text-[#1A66FF] transition">
+                    <i data-lucide="list-checks" class="w-6 h-6"></i>
+                </a>
+
+                <!-- Profil Kandidat -->
+                <a href="#" class="flex flex-col items-center justify-center py-1 px-3 text-slate-700 hover:text-[#1A66FF] transition">
+                    <i data-lucide="user" class="w-6 h-6"></i>
+                </a>
+
+            </nav>
+        </div>
+
+    </div>
+
+    <!-- Inisialisasi Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

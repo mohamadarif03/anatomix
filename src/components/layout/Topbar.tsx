@@ -14,23 +14,23 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   return (
-    <header className="h-[60px] bg-white border-b border-[#e5e7eb] flex items-center justify-between px-4 sticky top-0 z-30">
+    <header className="h-[60px] bg-white border-b border-[#e5e7eb] flex items-center justify-between px-3 sm:px-4 sticky top-0 z-30 select-none">
       {/* Left: Brand & Hamburger */}
       <div className="flex items-center">
-        <div className="w-[214px] flex items-center justify-between pr-3">
+        <div className="flex items-center gap-2 sm:gap-4 md:w-[214px] md:justify-between pr-2 sm:pr-3">
           <Link href="/beranda" className="flex items-center no-underline group py-1">
             <Image
               src="/logo-horizontal.png"
               alt="PRIMA"
               width={140}
               height={44}
-              className="h-[36px] sm:h-[38px] w-auto object-contain group-hover:opacity-90 transition-opacity"
+              className="h-[32px] sm:h-[38px] w-auto object-contain group-hover:opacity-90 transition-opacity"
               priority
             />
           </Link>
           <button
             onClick={onToggleSidebar}
-            className="text-[#475569] hover:text-[#0f172a] p-1 rounded transition"
+            className="text-[#475569] hover:text-[#0f172a] p-1.5 rounded-lg hover:bg-slate-100 transition"
             aria-label="Toggle Sidebar"
           >
             <i className="bi bi-list text-[20px]"></i>
@@ -38,7 +38,7 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
         </div>
       </div>
 
-      {/* Center: Search Input */}
+      {/* Center: Search Input (Desktop) */}
       <div className="hidden md:flex items-center flex-1 max-w-[385px] mx-4">
         <div className="relative w-full">
           <input
@@ -51,18 +51,28 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
       </div>
 
       {/* Right: Icons & Profile */}
-      <div className="flex items-center gap-4 pr-1">
-        {/* Sun Icon */}
+      <div className="flex items-center gap-2 sm:gap-4 pr-1">
+        {/* Streak Flame Badge */}
+        <Link
+          href="/kelemahan"
+          className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold hover:bg-amber-100 transition"
+          title="5 Hari Beruntun Konsisten"
+        >
+          <span>🔥</span>
+          <span className="hidden sm:inline">5 Hari</span>
+        </Link>
+
+        {/* Sun Icon (Desktop only) */}
         <button
-          className="text-[#334155] hover:text-[#0f172a] flex items-center justify-center"
+          className="hidden sm:flex text-[#334155] hover:text-[#0f172a] items-center justify-center p-1"
           title="Toggle Theme"
         >
           <i className="bi bi-sun-fill text-[15px]"></i>
         </button>
 
-        {/* Fullscreen Icon */}
+        {/* Fullscreen Icon (Desktop only) */}
         <button
-          className="text-[#334155] hover:text-[#0f172a] flex items-center justify-center"
+          className="hidden sm:flex text-[#334155] hover:text-[#0f172a] items-center justify-center p-1"
           title="Fullscreen"
         >
           <i className="bi bi-arrows-fullscreen text-[13.5px]"></i>
@@ -72,11 +82,11 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
         <div className="relative">
           <button
             onClick={() => setShowNotification(!showNotification)}
-            className="relative text-[#334155] hover:text-[#0f172a] flex items-center justify-center"
+            className="relative text-[#334155] hover:text-[#0f172a] flex items-center justify-center p-1"
             title="Notifikasi Belajar"
           >
-            <i className="bi bi-bell text-[15.5px]"></i>
-            <span className="absolute -top-2 -right-2 bg-[#dc2626] text-white text-[9.5px] font-bold w-[15px] h-[15px] rounded-full flex items-center justify-center leading-none">
+            <i className="bi bi-bell text-[16px]"></i>
+            <span className="absolute -top-1 -right-1 bg-[#dc2626] text-white text-[9.5px] font-bold w-[16px] h-[16px] rounded-full flex items-center justify-center leading-none border-2 border-white">
               3
             </span>
           </button>
@@ -99,13 +109,22 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
                     <p className="text-[#64748b] text-[11px]">Plexus brachialis perlu repetisi hari ini.</p>
                   </div>
                   <div className="py-2">
-                    <p className="font-semibold text-[#1e293b]">Rekomendasi Baru</p>
-                    <p className="text-[#64748b] text-[11px]">Latihan 3D Rotator cuff telah dijadwalkan.</p>
+                    <p className="font-semibold text-[#1e293b]">Streak Belajar Terjaga</p>
+                    <p className="text-[#64748b] text-[11px]">5 hari berturut-turut aktif berlatih.</p>
                   </div>
                   <div className="py-2">
-                    <p className="font-semibold text-[#1e293b]">Streak 5 Hari 🔥</p>
-                    <p className="text-[#64748b] text-[11px]">Disiplin belajar kamu meningkat!</p>
+                    <p className="font-semibold text-[#1e293b]">Materi AI Baru</p>
+                    <p className="text-[#64748b] text-[11px]">Vaskularisasi Koroner siap dipelajari.</p>
                   </div>
+                </div>
+                <div className="pt-2 border-t border-[#f1f5f9] text-center">
+                  <Link
+                    href="/latihan-materials"
+                    onClick={() => setShowNotification(false)}
+                    className="text-[#0d6efd] font-semibold hover:underline"
+                  >
+                    Mulai Sesi Review Hari Ini →
+                  </Link>
                 </div>
               </div>
             </>
@@ -113,18 +132,18 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
         </div>
 
         {/* Divider */}
-        <div className="h-[24px] w-[1px] bg-[#e2e8f0] mx-0.5"></div>
+        <div className="h-[20px] w-[1px] bg-[#e2e8f0] mx-0.5"></div>
 
         {/* User Profile */}
         <div className="relative">
           <button
             onClick={() => setShowUserMenu(!showUserMenu)}
-            className="flex items-center gap-2 text-left hover:bg-slate-50 p-1.5 rounded-lg transition"
+            className="flex items-center gap-2 text-left hover:bg-slate-50 p-1 sm:p-1.5 rounded-lg transition"
             aria-label="Menu Pengguna"
             aria-expanded={showUserMenu}
           >
-            <div className="w-[26px] h-[26px] rounded-full bg-[#64748b] text-white flex items-center justify-center overflow-hidden">
-              <i className="bi bi-person-circle text-[26px] leading-none text-[#64748b] bg-white"></i>
+            <div className="w-[28px] h-[28px] rounded-full bg-[#0d6efd] text-white flex items-center justify-center font-bold text-xs shadow-xs">
+              {mockUserProfile.name.charAt(0)}
             </div>
             <span className="text-[13px] font-semibold text-[#1e293b] hidden sm:inline-block">
               {mockUserProfile.name}
