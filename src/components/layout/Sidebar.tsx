@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { mockUserProfile } from "@/lib/mock-data";
+import { usePwaInstall } from "@/hooks/usePwaInstall";
+import { InstallModal } from "@/components/pwa/InstallModal";
 
 interface SidebarProps {
   desktopOpen: boolean;
@@ -96,6 +98,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onCloseMobile,
 }) => {
   const pathname = usePathname();
+  const { isInstalled, canPrompt, isModalOpen, openModal, closeModal, promptInstall } =
+    usePwaInstall();
+
+  const handleInstallClick = () => {
+    if (canPrompt) {
+      promptInstall();
+    } else {
+      openModal();
+    }
+  };
 
   const sidebarContent = (
     <>
@@ -158,8 +170,51 @@ export const Sidebar: React.FC<SidebarProps> = ({
         })}
       </nav>
 
-      {/* Streak Mini Box in Sidebar Footer */}
-      <div className="px-4 pt-4 border-t border-[#f1f5f9]">
+      {/* Sidebar Footer: PWA Install Button & Streak */}
+      <div className="px-4 pt-3 pb-1 border-t border-[#f1f5f9] space-y-2.5">
+        {/* Tombol Install PWA */}
+        {isInstalled ? (
+          <div className="p-2.5 bg-emerald-50/80 border border-emerald-200/80 rounded-[8px] flex items-center justify-between text-emerald-800">
+            <div className="flex items-center gap-2 min-w-0">
+              <i className="bi bi-phone-fill text-[15px] text-emerald-600"></i>
+              <div className="min-w-0">
+                <div className="text-[11.5px] font-bold leading-tight truncate">PRIMA Terpasang</div>
+                <div className="text-[10px] text-emerald-600 truncate">Mode PWA Aktif</div>
+              </div>
+            </div>
+            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-600 text-white shrink-0">
+              ✓ PWA
+            </span>
+          </div>
+        ) : (
+          <button
+            onClick={() => {
+              handleInstallClick();
+              onCloseMobile();
+            }}
+            className="w-full p-2.5 bg-gradient-to-r from-blue-50 to-indigo-50/70 hover:from-blue-100 hover:to-indigo-100 border border-blue-200/80 rounded-[8px] flex items-center justify-between text-[#0d6efd] transition-all group shadow-2xs text-left cursor-pointer"
+            title="Install PRIMA ke Layar Utama (PWA)"
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-7 h-7 rounded-md bg-[#0d6efd] text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
+                <i className="bi bi-download text-[12.5px]"></i>
+              </div>
+              <div className="min-w-0">
+                <div className="text-[12px] font-bold text-[#1e293b] group-hover:text-[#0d6efd] leading-tight">
+                  Install Aplikasi
+                </div>
+                <div className="text-[10px] text-[#64748b]">
+                  Pasang di HP / Laptop
+                </div>
+              </div>
+            </div>
+            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-600 text-white shrink-0 shadow-2xs">
+              PWA
+            </span>
+          </button>
+        )}
+
+        {/* Streak Mini Box in Sidebar Footer */}
         <div className="p-3 bg-[#f8f9fa] border border-[#e2e8f0] rounded-[6px] flex items-center gap-3">
           <div className="w-[30px] h-[30px] rounded-[6px] bg-[#fff3cd] border border-[#ffeeba] text-[#856404] flex items-center justify-center font-bold text-[14px]">
             🔥
@@ -236,6 +291,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </aside>
         </div>
       </div>
+
+      {/* PWA Install Guidance & Prompt Modal */}
+      <InstallModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        canPrompt={canPrompt}
+        onPromptInstall={promptInstall}
+      />
     </>
   );
 };

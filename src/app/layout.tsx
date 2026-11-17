@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppShellWrapper } from "@/components/layout/AppShellWrapper";
@@ -14,9 +14,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#0d6efd",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: "PRIMA - Platform Review Interaktif Medis Adaptif",
   description: "Aplikasi pendamping belajar mandiri untuk mahasiswa kedokteran preklinik",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "PRIMA",
+  },
   icons: {
     icon: [
       { url: "/icon.png", type: "image/png", sizes: "340x340" },
