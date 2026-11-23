@@ -127,9 +127,9 @@ function LatihanSoalContent() {
   };
 
   // ==========================================
-  // HANDLER TAHAP 1: MULAI SESI (SIMULASI AI)
+  // HANDLER TAHAP 1: MULAI SESI (API LIVE & GEMINI AI)
   // ==========================================
-  const handleStartSession = () => {
+  const handleStartSession = async () => {
     setIsGenerating(true);
     setGenerateStep(1);
     setGeneratePercent(25);
@@ -144,43 +144,35 @@ function LatihanSoalContent() {
     setTimeout(() => {
       setGenerateStep(3);
       setGeneratePercent(95);
-    }, 1600);
+    }, 1500);
 
-    // Selesai & inisialisasi soal
-    setTimeout(() => {
-      setGeneratePercent(100);
+    try {
+      const res = await fetch(`/api/quizzes?materialId=${selectedMaterialId}&count=${questionCount}`);
+      const data = await res.json();
+
+      let questionsToUse: MaterialQuizQuestion[] = [];
+      if (data.success && Array.isArray(data.questions) && data.questions.length > 0) {
+        questionsToUse = data.questions;
+      } else {
+        questionsToUse = mockMaterialQuizQuestions.slice(0, questionCount);
+      }
+
+      setTimeout(() => {
+        setGeneratePercent(100);
+        setIsGenerating(false);
+        setActiveQuestions(questionsToUse);
+        setCurrentQuestionIndex(0);
+        setUserAnswers({});
+        setMarkedQuestions({});
+        setSecondsElapsed(0);
+        setSecondsRemaining(questionCount * 60); // 1 menit per soal
+        setCurrentStage("session");
+      }, 1900);
+    } catch {
+      setActiveQuestions(mockMaterialQuizQuestions.slice(0, questionCount));
       setIsGenerating(false);
-
-      // Filter bank soal yang cocok
-      let pool = mockMaterialQuizQuestions.filter((q) => q.materialId === selectedMaterialId);
-
-      if (selectedSubtopicId !== "semua") {
-        pool = pool.filter((q) => q.subtopicId === selectedSubtopicId);
-      }
-
-      if (difficulty !== "semua") {
-        pool = pool.filter((q) => q.difficulty === difficulty);
-      }
-
-      // Jika pool kosong karena filter terlalu sempit, fallback ke pool materi
-      if (pool.length === 0) {
-        pool = mockMaterialQuizQuestions.filter((q) => q.materialId === selectedMaterialId);
-      }
-      if (pool.length === 0) {
-        pool = mockMaterialQuizQuestions;
-      }
-
-      // Ambil sejumlah questionCount
-      const selectedPool = pool.slice(0, questionCount);
-
-      setActiveQuestions(selectedPool);
-      setCurrentQuestionIndex(0);
-      setUserAnswers({});
-      setMarkedQuestions({});
-      setSecondsElapsed(0);
-      setSecondsRemaining(questionCount * 60); // 1 menit per soal
       setCurrentStage("session");
-    }, 2200);
+    }
   };
 
   // ==========================================
@@ -212,6 +204,17 @@ function LatihanSoalContent() {
 
   const handleFinishSession = () => {
     setIsSubmitConfirmOpen(false);
+
+    // Kirim catatan jawaban ke backend database
+    fetch("/api/quizzes/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        materialId: selectedMaterialId,
+        answers: userAnswers,
+        secondsElapsed,
+      }),
+    }).catch((err) => console.error("Gagal mencatat log kuis ke DB:", err));
 
     // Hitung skor akhir
     let correct = 0;

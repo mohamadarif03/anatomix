@@ -21,6 +21,115 @@ export interface GeneratedSummary {
   clinicalPoints: string[];
 }
 
+export interface GeneratedQuizQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  explanation: string;
+  difficulty: "mudah" | "sedang" | "sulit";
+  latinTerms?: string[];
+}
+
+export async function generateGeminiQuizQuestions(params: {
+  materialTitle: string;
+  region: string;
+  count?: number;
+}): Promise<GeneratedQuizQuestion[]> {
+  const { materialTitle, region, count = 5 } = params;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (apiKey && apiKey.trim().length > 0) {
+    try {
+      console.log(`🤖 Memanggil Gemini 2.5 Flash API untuk membuat ${count} soal kuis: "${materialTitle}"...`);
+      const prompt = `Anda adalah dosen penguji anatomi & kedokteran untuk mahasiswa kedokteran preklinik (PRIMA).
+Buatkan ${count} butir soal pilihan ganda berbasis kasus klinis (clinical vignette) untuk topik: "${materialTitle}" pada regio tubuh "${region}".
+
+Kriteria soal:
+1. Soal diawali skenario pasien realistis (usia, keluhan, riwayat trauma/pemeriksaan fisis).
+2. Terdapat 4 atau 5 pilihan jawaban (A, B, C, D, E) dengan istilah anatomi/Latin yang tepat.
+3. Sertakan kunci jawaban (huruf opsi, misal "A") dan penjelasan ilmiah mendalam.
+
+Keluarkan dalam format JSON murni berbentuk array:
+[
+  {
+    "id": "q-ai-1",
+    "question": "Kasus vignette klinis lengkap...",
+    "options": ["A. Pilihan A", "B. Pilihan B", "C. Pilihan C", "D. Pilihan D", "E. Pilihan E"],
+    "correctAnswer": "A",
+    "explanation": "Pembahasan medis detail kenapa opsi ini benar dan opsi lain salah.",
+    "difficulty": "sedang",
+    "latinTerms": ["Terminologia Anatomica 1", "Terminologia Anatomica 2"]
+  }
+]`;
+
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+              responseMimeType: "application/json",
+              temperature: 0.3,
+            },
+          }),
+        }
+      );
+
+      if (res.ok) {
+        const data = await res.json();
+        const jsonText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (jsonText) {
+          const parsed = JSON.parse(jsonText);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            console.log(`✅ Berhasil men-generate ${parsed.length} soal kuis klinis dengan Gemini 2.5 Flash!`);
+            return parsed;
+          }
+        }
+      }
+    } catch (err) {
+      console.warn("⚠️ Gagal memanggil Gemini untuk kuis, beralih ke fallback bank soal:", err);
+    }
+  }
+
+  return generateFallbackQuizQuestions(materialTitle, region);
+}
+
+function generateFallbackQuizQuestions(title: string, region: string): GeneratedQuizQuestion[] {
+  return [
+    {
+      id: `q-fb-${Date.now()}-1`,
+      question: `Seorang pasien datang dengan keluhan kelemahan fungsional pada regio ${region}. Dari pemeriksaan radiologis, dicurigai terjadi kompresi pada struktur vaskular dan saraf utama di area tersebut. Struktur manakah yang paling rentan mengalami cedera?`,
+      options: [
+        `A. Ramus profundus arteria principalis regio ${region}`,
+        `B. Fascia superficialis dan jaringan subkutan`,
+        `C. Tendo musculi stabilisator articulationis`,
+        `D. Vena comitans superfisialis`,
+      ],
+      correctAnswer: "A",
+      explanation: `Struktur neurovaskular profunda yang melewati kompartemen osteofibrosa sempit pada regio ${region} memiliki kerentanan paling tinggi terhadap sindrom kompresi atau iskemia sekunder.`,
+      difficulty: "sedang",
+      latinTerms: [`Regio ${region}`, "Vasa et Nervi Profundi"],
+    },
+    {
+      id: `q-fb-${Date.now()}-2`,
+      question: `Pada tindakan diseksi anatomis regio ${region}, orientasi topografis dipandu oleh landmark tulang dan batas muskular penanda. Struktur batas manakah yang memisahkan kompartemen anterior dan posterior?`,
+      options: [
+        "A. Septum intermusculare",
+        "B. Tunica intima pembuluh darah",
+        "C. Perichondrium cartilaginis",
+        "D. Membrana mucosa parietalis",
+      ],
+      correctAnswer: "A",
+      explanation: "Septum intermusculare yang merupakan perluasan fascia profunda memisahkan kompartemen otot anterior dan posterior pada ekstremitas dan dinding regio tubuh.",
+      difficulty: "mudah",
+      latinTerms: ["Septum intermusculare", "Fascia profunda"],
+    },
+  ];
+}
+
 export async function generateGeminiSummary(params: {
   title: string;
   region: string;
@@ -70,7 +179,7 @@ Keluarkan dalam format JSON murni dengan skema berikut:
 }`;
 
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
