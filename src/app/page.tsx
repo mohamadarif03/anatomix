@@ -1011,32 +1011,35 @@ export default function LandingPage() {
           </header>
 
           {/* Headline */}
-          <h1 className="headline" id="home">
+          {/* Top Pill Badge */}
+          <div className="absolute top-[72px] left-[calc(var(--fx)+46px)] z-10 hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-600/10 border border-blue-600/25 text-[#0f4cd6] text-xs font-bold tracking-wide backdrop-blur-md shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#0f4cd6] animate-pulse"></span>
+            <span>ATLAS 3D MEDIS PREKLINIK FK</span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="headline !top-[108px]" id="home">
             <span className="headline-line">
-              <span className="hl-rv">Anatomi tubuh — manusia</span>
+              <span className="hl-rv">Atlas Anatomi 3D Medis</span>
             </span>
             <span className="headline-line headline-line2">
-              <svg className="chain" viewBox="0 0 151 48" aria-hidden="true">
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M22 6c-9.94 0-18 8.06-18 18s8.06 18 18 18h16c9.94 0 18-8.06 18-18s-8.06-18-18-18H22zm0 8h16c5.52 0 10 4.48 10 10s-4.48 10-10 10H22c-5.52 0-10-4.48-10-10s4.48-10 10-10zm45.5-8c-9.94 0-18 8.06-18 18s8.06 18 18 18h16c9.94 0 18-8.06 18-18s-8.06-18-18-18h-16zm0 8h16c5.52 0 10 4.48 10 10s-4.48 10-10 10h-16c-5.52 0-10-4.48-10-10s4.48-10 10-10zm45.5-8c-9.94 0-18 8.06-18 18s8.06 18 18 18h16c9.94 0 18-8.06 18-18s-8.06-18-18-18h-16zm0 8h16c5.52 0 10 4.48 10 10s-4.48 10-10 10h-16c-5.52 0-10-4.48-10-10s4.48-10 10-10z"
-                />
-              </svg>
-              <span>jelajahi sistem organ</span>
+              <span className="inline-flex items-center px-3 py-1 rounded-xl text-[0.38em] font-bold tracking-normal bg-[#0f4cd6] text-white shadow-sm mr-2 shrink-0">
+                6 Regio Tubuh
+              </span>
+              <span>eksplorasi lapis demi lapis</span>
             </span>
           </h1>
 
           {/* Features */}
           <div className="features">
             <div className="feature">
-              <span>Atlas 3D</span> <b>/01</b>
+              <span>Atlas 3D Interaktif</span> <b>/01</b>
             </div>
             <div className="feature">
-              <span>Lapisan Organ</span> <b>/02</b>
+              <span>Rencana AI & Rangkuman</span> <b>/02</b>
             </div>
             <div className="feature">
-              <span>Interaktif</span> <b>/03</b>
+              <span>Kuis & Spaced Repetition</span> <b>/03</b>
             </div>
           </div>
 
@@ -1103,11 +1106,11 @@ export default function LandingPage() {
               interaktif lapis demi lapis.
             </p>
             <div className="card-bottom">
-              <div className="start">
+              <Link href="/anatomi" className="start hover:text-[#0f4cd6] transition-colors" title="Buka Atlas Anatomi 3D">
                 Mulai
                 <br />
-                <strong>belajar</strong>
-              </div>
+                <strong>eksplorasi</strong>
+              </Link>
               <button
                 className="shuffle"
                 type="button"
@@ -1159,10 +1162,10 @@ export default function LandingPage() {
 
           {/* Ghost typography behind the subject */}
           <div className="ghost ghost-one" aria-hidden="true">
-            B<i className="o-gap"></i>DY
+            ANAT<i className="o-gap"></i>MI
           </div>
           <div className="ghost ghost-two" aria-hidden="true">
-            SCAN
+            ATLAS 3D
           </div>
 
           {/* Robo-o-avatar */}
