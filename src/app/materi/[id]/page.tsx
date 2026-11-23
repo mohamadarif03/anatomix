@@ -10,9 +10,25 @@ export default function MateriDetailPage() {
   const params = useParams();
   const materialId = params?.id as string;
 
-  // Temukan materi dari mock data
-  const material = useMemo(() => {
+  // Temukan materi dari state (didukung API live & fallback mock data)
+  const [material, setMaterial] = useState<MaterialItem | null>(() => {
     return mockMaterials.find((m) => m.id === materialId) || null;
+  });
+
+  React.useEffect(() => {
+    if (!materialId) return;
+    async function loadDetail() {
+      try {
+        const res = await fetch(`/api/materials/${materialId}`);
+        const data = await res.json();
+        if (data.success && data.material) {
+          setMaterial(data.material);
+        }
+      } catch (err) {
+        console.error("Gagal memuat detail materi:", err);
+      }
+    }
+    loadDetail();
   }, [materialId]);
 
   // State Akordeon Subtopik (set id subtopik yang terbuka)

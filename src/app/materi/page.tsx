@@ -14,6 +14,22 @@ export default function MateriListPage() {
   const [selectedRegion, setSelectedRegion] = useState<RegionFilter>("Semua");
   const [selectedStatus, setSelectedStatus] = useState<StatusFilter>("Semua");
 
+  // Load materials from backend API on mount
+  React.useEffect(() => {
+    async function loadMaterials() {
+      try {
+        const res = await fetch("/api/materials");
+        const data = await res.json();
+        if (data.success && Array.isArray(data.materials) && data.materials.length > 0) {
+          setMaterials(data.materials);
+        }
+      } catch (err) {
+        console.error("Gagal mengambil data materi dari server:", err);
+      }
+    }
+    loadMaterials();
+  }, []);
+
   // Dropzone drag state & file input
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -48,132 +64,71 @@ export default function MateriListPage() {
     }, 3500);
   };
 
-  // Helper untuk menjalankan simulasi pemrosesan AI bertahap
-  const simulateAIProcessing = (
+  // Upload and process material with backend AI
+  const uploadAndProcessMaterial = async (
+    fileOrContent: File | { title: string; region: string; content: string },
     fileName: string,
     title: string,
     region: "Caput" | "Collum" | "Thorax" | "Abdomen" | "Pelvis" | "Membrum",
-    fileSizeStr = "12.5 MB",
-    isRetryForId?: string
+    fileSizeStr = "12.5 MB"
   ) => {
     setIsProcessing(true);
     setProcessingFileName(fileName);
     setProcessingStep(1);
-    setProcessingPercent(15);
+    setProcessingPercent(20);
 
-    // Step 1: Membaca dokumen
-    const timer1 = setTimeout(() => {
-      setProcessingStep(2);
-      setProcessingPercent(55);
-    }, 900);
+    const stepInterval = setInterval(() => {
+      setProcessingPercent((prev) => {
+        if (prev < 45) {
+          setProcessingStep(2);
+          return prev + 15;
+        }
+        if (prev < 85) {
+          setProcessingStep(3);
+          return prev + 10;
+        }
+        return prev;
+      });
+    }, 600);
 
-    // Step 2: Merangkum isi
-    const timer2 = setTimeout(() => {
-      setProcessingStep(3);
-      setProcessingPercent(88);
-    }, 1800);
+    try {
+      let res: Response;
+      if (fileOrContent instanceof File) {
+        const formData = new FormData();
+        formData.append("file", fileOrContent);
+        formData.append("title", title);
+        formData.append("region", region);
+        res = await fetch("/api/materials", {
+          method: "POST",
+          body: formData,
+        });
+      } else {
+        res = await fetch("/api/materials", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(fileOrContent),
+        });
+      }
 
-    // Step 3: Memecah per subtopik & Finalisasi
-    const timer3 = setTimeout(() => {
+      const data = await res.json();
+      clearInterval(stepInterval);
       setProcessingPercent(100);
 
       setTimeout(() => {
         setIsProcessing(false);
-
-        if (isRetryForId) {
-          // Pulihkan materi yang gagal
-          setMaterials((prev) =>
-            prev.map((item) => {
-              if (item.id === isRetryForId) {
-                return {
-                  ...item,
-                  status: "ready",
-                  processingProgress: 100,
-                  aiSummaryOverview:
-                    "Berhasil diproses ulang: Rangkuman komprehensif mengenai topografi kavum pelvis, diafragma pelvis (m. levator ani), dan persarafan pleksus sakralis.",
-                  subtopics: [
-                    {
-                      id: `${isRetryForId}-sub1`,
-                      title: "Dinding dan Diafragma Pelvis",
-                      latinTerm: "Diaphragma Pelvis & M. Levator Ani",
-                      overview: "Dasar pelvis dibentuk oleh m. levator ani dan m. coccygeus yang menopang organ visera pelvis.",
-                      keyPoints: [
-                        "M. levator ani terdiri atas m. puborectalis, m. pubococcygeus, dan m. iliococcygeus.",
-                        "M. puborectalis membentuk sling di sekeliling taut anorektal untuk mempertahankan kontinensia feses.",
-                      ],
-                      keyTerms: [
-                        {
-                          term: "Diafragma Pelvis",
-                          latin: "Diaphragma pelvis",
-                          definition: "Lantai muskular penutup cavitas pelvis inferior.",
-                        },
-                      ],
-                      clinicalCorrelation:
-                        "Kelemahan m. levator ani pascapersalinan pervaginam dapat mencetuskan prolaps organ pelvis dan inkontinensia urin.",
-                    },
-                  ],
-                };
-              }
-              return item;
-            })
-          );
-          showToast(`Materi "${fileName}" berhasil diproses ulang!`);
+        if (data.success && data.material) {
+          setMaterials((prev) => [data.material, ...prev]);
+          showToast(`Materi "${title}" berhasil dirangkum oleh AI!`);
         } else {
-          // Buat item materi baru
-          const newId = `mat-${Date.now().toString().slice(-4)}`;
-          const newMaterial: MaterialItem = {
-            id: newId,
-            title: title || fileName.replace(/\.[^/.]+$/, ""),
-            region: region,
-            fileName: fileName,
-            fileSize: fileSizeStr,
-            fileType: fileName.toLowerCase().endsWith(".pptx") || fileName.toLowerCase().endsWith(".ppt") ? "ppt" : "pdf",
-            pageCount: 24,
-            uploadedAt: "Baru saja",
-            status: "ready",
-            processingProgress: 100,
-            aiSummaryOverview: `Rangkuman AI otomatis untuk materi ${title || fileName}. Isi dokumen telah diekstraksi dan dibagi menjadi subtopik relevan.`,
-            subtopics: [
-              {
-                id: `${newId}-sub1`,
-                title: "Ringkasan Konsep Utama & Morfologi",
-                latinTerm: `Structura Principalis Regio ${region}`,
-                overview: `Analisis teks dari berkas ${fileName} yang merinci struktur anatomis penting pada regio ${region}.`,
-                keyPoints: [
-                  `Identifikasi kompartemen primer dan batas-batas anatomis regio ${region}.`,
-                  "Vaskularisasi regional dan korelasi jaras inervasi motorik sensorik.",
-                  "Struktur pelindung dan hubungan topografis dengan organ sekitar.",
-                ],
-                keyTerms: [
-                  {
-                    term: `Organ Primer ${region}`,
-                    latin: `Organa Regionalis ${region}`,
-                    definition: `Kumpulan struktur fungsional utama pada regio ${region}.`,
-                  },
-                ],
-                clinicalCorrelation: "Pemeriksaan fisis dan pemahaman batas orientasi klinis esensial untuk diagnosis banding.",
-              },
-            ],
-            previewPages: [
-              {
-                pageNumber: 1,
-                sectionTitle: "Halaman 1: Dokumen Asli Mahasiswa",
-                previewSnippet: `Cuplikan materi ${fileName} yang berhasil diekstraksi secara lokal oleh PRIMA AI.`,
-              },
-            ],
-          };
-
-          setMaterials((prev) => [newMaterial, ...prev]);
-          showToast(`Materi "${newMaterial.title}" berhasil dirangkum oleh AI!`);
+          showToast(`Gagal merangkum materi: ${data.message || "Kesalahan server"}`);
         }
-      }, 400);
-    }, 2700);
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-    };
+      }, 500);
+    } catch (err) {
+      clearInterval(stepInterval);
+      setIsProcessing(false);
+      console.error(err);
+      showToast("Gagal mengunggah materi.");
+    }
   };
 
   // Validasi Berkas
@@ -198,7 +153,7 @@ export default function MateriListPage() {
     const sizeStr = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
     const cleanTitle = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
 
-    simulateAIProcessing(file.name, cleanTitle, "Thorax", sizeStr);
+    uploadAndProcessMaterial(file, file.name, cleanTitle, "Thorax", sizeStr);
   };
 
   // Drag and Drop Handlers
@@ -239,35 +194,63 @@ export default function MateriListPage() {
     }
 
     setIsPasteModalOpen(false);
-    simulateAIProcessing(`Catatan-${manualTitle.replace(/\s+/g, "-")}.pdf`, manualTitle, manualRegion, "1.2 MB");
+    uploadAndProcessMaterial(
+      { title: manualTitle.trim(), region: manualRegion, content: manualContent.trim() },
+      `Catatan-${manualTitle.replace(/\s+/g, "-")}.txt`,
+      manualTitle.trim(),
+      manualRegion,
+      "1.2 MB"
+    );
 
     setManualTitle("");
     setManualContent("");
   };
 
-  // Ubah Nama Submit
-  const handleSaveRename = (e: React.FormEvent) => {
+  // Ubah Nama Submit (Persist to API)
+  const handleSaveRename = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingItem || !editingTitle.trim()) return;
 
-    setMaterials((prev) =>
-      prev.map((item) => (item.id === editingItem.id ? { ...item, title: editingTitle.trim() } : item))
-    );
-    showToast(`Nama materi berhasil diperbarui menjadi "${editingTitle.trim()}".`);
+    try {
+      await fetch(`/api/materials/${editingItem.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: editingTitle.trim() }),
+      });
+      setMaterials((prev) =>
+        prev.map((item) => (item.id === editingItem.id ? { ...item, title: editingTitle.trim() } : item))
+      );
+      showToast(`Nama materi berhasil diperbarui menjadi "${editingTitle.trim()}".`);
+    } catch {
+      showToast("Gagal memperbarui nama materi.");
+    }
     setEditingItem(null);
   };
 
-  // Hapus Materi Submit
-  const handleConfirmDelete = () => {
+  // Hapus Materi Submit (Persist to API)
+  const handleConfirmDelete = async () => {
     if (!deletingItem) return;
-    setMaterials((prev) => prev.filter((item) => item.id !== deletingItem.id));
-    showToast(`Materi "${deletingItem.title}" telah dihapus.`);
+    try {
+      await fetch(`/api/materials/${deletingItem.id}`, {
+        method: "DELETE",
+      });
+      setMaterials((prev) => prev.filter((item) => item.id !== deletingItem.id));
+      showToast(`Materi "${deletingItem.title}" telah dihapus.`);
+    } catch {
+      showToast("Gagal menghapus materi.");
+    }
     setDeletingItem(null);
   };
 
   // Retry Pemrosesan Gagal
   const handleRetryProcessing = (item: MaterialItem) => {
-    simulateAIProcessing(item.fileName, item.title, item.region, item.fileSize, item.id);
+    uploadAndProcessMaterial(
+      { title: item.title, region: item.region as any, content: item.title },
+      item.fileName,
+      item.title,
+      item.region as any,
+      item.fileSize
+    );
   };
 
   // Filtered Materials
