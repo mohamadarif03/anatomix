@@ -1,0 +1,181 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 1. Data Pengguna & Akun
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  institution  String?   @default("Fakultas Kedokteran")
+  semester     Int?      @default(1)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  studyProfile     StudyProfile?
+  studyPlans       StudyPlan[]
+  materials        Material[]
+  quizAttempts     QuizAttempt[]
+  flashcardReviews FlashcardReview[]
+}
+
+// 2. Profil Belajar & Onboarding (F1, F2)
+model StudyProfile {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  targetExam     String   @default("Ujian Blok Anatomi")
+  examDate       DateTime
+  dailyHours     Float    @default(2.0)
+  focusRegions   String   // JSON array string: ["Thorax", "Abdomen", ...]
+  learningStyle  String?  @default("visual")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// 3. Rencana Belajar AI (F2)
+model StudyPlan {
+  id         String      @id @default(cuid())
+  userId     String
+  title      String
+  targetDate DateTime
+  status     String      @default("active") // active, completed, archived
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks StudyTask[]
+}
+
+model StudyTask {
+  id              String   @id @default(cuid())
+  planId          String
+  date            DateTime
+  dayName         String   // "Senin", "Selasa", dll
+  topic           String
+  system          String   // "Muskuloskeletal", "Respirasi", dll
+  durationMinutes Int      @default(60)
+  taskType        String   @default("Materi") // "Materi", "Latihan", "Review"
+  isCompleted     Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  plan StudyPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+}
+
+// 4. Materi Kuliah & Rangkuman AI (F3)
+model Material {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  code        String?
+  system      String   // "Respirasi", "Kardiovaskuler", dll
+  lecturer    String?
+  fileUrl     String?
+  fileName    String?
+  fileSize    String?
+  pageCount   Int      @default(0)
+  status      String   @default("ready") // "uploading", "processing", "ready", "error"
+  uploadedAt  DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  summary    MaterialSummary?
+  quizzes    Quiz[]
+  flashcards Flashcard[]
+}
+
+model MaterialSummary {
+  id             String   @id @default(cuid())
+  materialId     String   @unique
+  content        String   // Teks Markdown ringkasan lengkap
+  subtopics      String   // JSON string array subtopik
+  clinicalPoints String   // JSON string array poin penting klinis
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  material Material @relation(fields: [materialId], references: [id], onDelete: Cascade)
+}
+
+// 5. Latihan Soal & Vignette Klinis (F4, F9)
+model Quiz {
+  id               String   @id @default(cuid())
+  materialId       String?
+  region           String?  // Caput, Collum, Thorax, Abdomen, Pelvis, Membrum
+  mode             String   @default("pilihan-ganda") // "pilihan-ganda" atau "klik-struktur"
+  question         String
+  options          String?  // JSON string array opsi jawaban jika mode pilihan ganda
+  correctAnswer    String   // Kunci jawaban ("A".."D" atau target structure ID)
+  explanation      String
+  difficulty       String   @default("medium") // easy, medium, hard
+  isClinicalCase   Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  material Material?     @relation(fields: [materialId], references: [id], onDelete: SetNull)
+  attempts QuizAttempt[]
+}
+
+model QuizAttempt {
+  id             String   @id @default(cuid())
+  userId         String
+  quizId         String
+  selectedAnswer String   // Jawaban mahasiswa
+  isCorrect      Boolean
+  timeSpentSec   Int      @default(0)
+  attemptedAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+}
+
+// 6. Flashcard & Algoritma Spaced Repetition SM-2 (F5, F7)
+model Flashcard {
+  id         String   @id @default(cuid())
+  materialId String?
+  deckName   String   @default("Umum")
+  front      String   // Istilah / Nomenklatur Latin
+  back       String   // Penjelasan / Terjemahan Klinis
+  latinName  String?
+  system     String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  material Material?         @relation(fields: [materialId], references: [id], onDelete: SetNull)
+  reviews  FlashcardReview[]
+}
+
+model FlashcardReview {
+  id             String   @id @default(cuid())
+  userId         String
+  flashcardId    String
+  rating         String   // "unlearned" (1), "hesitant" (2), "mastered" (3)
+  intervalDays   Int      @default(1)
+  easeFactor     Float    @default(2.5) // Faktor pengali SM-2
+  reviewCount    Int      @default(0)
+  nextReviewAt   DateTime @default(now())
+  lastReviewedAt DateTime @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flashcard Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+}
+
+// 7. Master Data Struktur Anatomi 3D (F6)
+model AnatomyStructure {
+  id                String   @id // e.g. "arcus_aortae"
+  region            String   // "caput", "collum", "thorax", "abdomen", "pelvis", "membrum"
+  nameId            String   // Nama Indonesia
+  nameLatin         String   // Nama Latin
+  category          String   // "Tulang", "Otot", "Organ", "Pembuluh", "Saraf"
+  description       String
+  relatedStructures String?  // JSON string array ID struktur terkait: ["aorta_ascendens", ...]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
