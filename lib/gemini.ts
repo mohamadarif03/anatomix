@@ -1,5 +1,5 @@
 /**
- * Gemini AI Helper untuk PRIMA
+ * Gemini AI Helper untuk ANATOMIX
  * Mendukung pemanggilan live Google Gemini 1.5 Flash API dengan fallback kurikulum medis cerdas.
  */
 
@@ -42,7 +42,7 @@ export async function generateGeminiQuizQuestions(params: {
   if (apiKey && apiKey.trim().length > 0) {
     try {
       console.log(`🤖 Memanggil Gemini 2.5 Flash API untuk membuat ${count} soal kuis: "${materialTitle}"...`);
-      const prompt = `Anda adalah dosen penguji anatomi & kedokteran untuk mahasiswa kedokteran preklinik (PRIMA).
+      const prompt = `Anda adalah dosen penguji anatomi & kedokteran untuk mahasiswa kedokteran preklinik (ANATOMIX).
 Buatkan ${count} butir soal pilihan ganda berbasis kasus klinis (clinical vignette) untuk topik: "${materialTitle}" pada regio tubuh "${region}".
 
 Kriteria soal:
@@ -141,7 +141,7 @@ export async function generateGeminiSummary(params: {
   if (apiKey && apiKey.trim().length > 0) {
     try {
       console.log(`🤖 Memanggil Gemini 1.5 Flash API untuk merangkum: "${title}"...`);
-      const prompt = `Anda adalah asisten AI medis untuk mahasiswa kedokteran preklinik (PRIMA - Platform Review Interaktif Medis Adaptif).
+      const prompt = `Anda adalah asisten AI medis untuk mahasiswa kedokteran preklinik (ANATOMIX - Platform Edukasi Anatomi 3D & Review Medis Adaptif).
 Tugas Anda adalah merangkum materi kuliah anatomi/kedokteran berikut menjadi rangkuman terstruktur dengan nomenklatur Latin resmi.
 
 Materi: "${title}"

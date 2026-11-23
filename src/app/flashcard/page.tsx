@@ -376,7 +376,7 @@ function FlashcardContent() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-[12px] font-semibold text-[#64748b] uppercase tracking-wider">
-                  PRIMA · Fitur AI (F5)
+                  ANATOMIX · Fitur AI (F5)
                 </span>
                 <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#f0fdf4] text-[#16a34a] font-bold border border-[#bbf7d0]">
                   Active Recall
@@ -612,7 +612,7 @@ function FlashcardContent() {
           {/* CATATAN KEPATUHAN PRD F5 */}
           <div className="p-3.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-[8px] text-[11.5px] text-[#64748b] leading-relaxed">
             <i className="bi bi-info-circle me-1.5 text-[#0d6efd]"></i>
-            Flashcard PRIMA memfasilitasi teknik <em>active recall</em> untuk memperkuat memori istilah anatomi. Dibuat oleh AI sebagai alat bantu belajar mandiri.
+            Flashcard ANATOMIX memfasilitasi teknik <em>active recall</em> untuk memperkuat memori istilah anatomi. Dibuat oleh AI sebagai alat bantu belajar mandiri.
           </div>
 
           {/* MODAL BUAT FLASHCARD BARU */}
@@ -1002,7 +1002,7 @@ function FlashcardContent() {
 
             {/* Footer Kartu */}
             <div className="pt-3 border-t border-[#f1f5f9] flex items-center justify-between text-[11.5px] text-[#94a3b8]">
-              <span>PRIMA Flashcard Engine</span>
+              <span>ANATOMIX Flashcard Engine</span>
               <span className="flex items-center gap-1 text-[#0d6efd]">
                 <i className="bi bi-arrow-repeat"></i>
                 <span>{isCardFlipped ? "Tampilkan Istilah Depan" : "Tampilkan Definisi Belakang"}</span>

@@ -277,7 +277,7 @@ function MasukContent() {
         <div className="w-full grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* ========================================================= */}
-          {/* KOLOM KIRI (Laptop): Panel Merek & Nilai Tambah PRIMA       */}
+          {/* KOLOM KIRI (Laptop): Panel Merek & Nilai Tambah ANATOMIX    */}
           {/* ========================================================= */}
           <div className="lg:col-span-6 xl:col-span-7 flex flex-col justify-center space-y-8">
             
@@ -287,7 +287,7 @@ function MasukContent() {
                 <div className="flex items-center gap-2.5">
                   <Image
                     src="/logo-horizontal.png"
-                    alt="PRIMA"
+                    alt="ANATOMIX"
                     width={165}
                     height={52}
                     className="h-[44px] sm:h-[48px] w-auto object-contain group-hover:opacity-90 transition-opacity"
@@ -297,7 +297,7 @@ function MasukContent() {
                     Preklinik
                   </span>
                 </div>
-                <p className="text-xs text-[#64748b] font-medium">Platform Review Interaktif Medis Adaptif</p>
+                <p className="text-xs text-[#64748b] font-medium">Platform Edukasi Anatomi 3D & Review Medis Adaptif</p>
               </Link>
 
               <h1 className="mt-6 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0f172a] leading-tight tracking-tight">
@@ -308,7 +308,7 @@ function MasukContent() {
               </p>
             </div>
 
-            {/* 3 Poin Manfaat PRIMA */}
+            {/* 3 Poin Manfaat ANATOMIX */}
             <div className="space-y-4">
               {/* Fitur 1 */}
               <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-white/80 backdrop-blur-sm border border-slate-200/80 shadow-xs hover:border-blue-300 hover:shadow-sm transition">
@@ -587,7 +587,7 @@ function MasukContent() {
               {activeTab === "daftar" && (
                 <form onSubmit={handleRegisterSubmit} noValidate className="space-y-4">
                   <div>
-                    <h2 className="text-lg font-bold text-[#0f172a]">Mulai Belajar di PRIMA</h2>
+                    <h2 className="text-lg font-bold text-[#0f172a]">Mulai Belajar di ANATOMIX</h2>
                     <p className="text-xs text-[#64748b] mt-0.5">
                       Daftar gratis untuk mulai membuat rencana belajar adaptifmu.
                     </p>
@@ -864,7 +864,7 @@ function MasukContent() {
                         >
                           Kebijakan Privasi
                         </button>{" "}
-                        PRIMA.
+                        ANATOMIX.
                       </span>
                     </label>
                     {errors.agreeTerms && (
@@ -915,7 +915,7 @@ function MasukContent() {
       {/* Footer Sederhana */}
       <footer className="relative z-10 py-4 px-6 border-t border-slate-200/60 bg-white/50 backdrop-blur-xs text-center text-xs text-[#64748b]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>&copy; {new Date().getFullYear()} PRIMA &mdash; Platform Review Interaktif Medis Adaptif.</span>
+          <span>&copy; {new Date().getFullYear()} ANATOMIX &mdash; Platform Edukasi Anatomi 3D & Review Medis Adaptif.</span>
           <div className="flex items-center gap-4 text-xs">
             <Link href="/" className="hover:text-blue-600 transition">Halaman Awal</Link>
             <span>&bull;</span>
@@ -1060,14 +1060,14 @@ function MasukContent() {
                 <i className="bi bi-shield-check text-[#0d6efd]"></i>
                 Ketentuan Layanan & Kebijakan Privasi
               </h3>
-              <p className="text-xs text-[#64748b] mt-0.5">PRIMA &mdash; Ringkasan Kebijakan Belajar Medis</p>
+              <p className="text-xs text-[#64748b] mt-0.5">ANATOMIX &mdash; Ringkasan Kebijakan Belajar Medis</p>
             </div>
 
             <div className="flex-1 overflow-y-auto space-y-3.5 pr-2 text-xs text-[#475569] leading-relaxed border-y border-slate-100 py-3">
               <div>
                 <h4 className="font-bold text-[#1e293b] mb-1">1. Tujuan Pendidikan</h4>
                 <p>
-                  PRIMA dirancang semata-mata sebagai platform pendamping belajar mandiri bagi mahasiswa kedokteran preklinik. Aplikasi ini bukan alat diagnostik medis dan tidak ditujukan untuk pengambilan keputusan klinis pada pasien nyata.
+                  ANATOMIX dirancang semata-mata sebagai platform pendamping belajar mandiri bagi mahasiswa kedokteran preklinik. Aplikasi ini bukan alat diagnostik medis dan tidak ditujukan untuk pengambilan keputusan klinis pada pasien nyata.
                 </p>
               </div>
 

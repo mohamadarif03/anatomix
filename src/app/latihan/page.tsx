@@ -310,7 +310,7 @@ function LatihanContent() {
         <div>
           <div className="flex items-center gap-2">
             <span className="text-[12px] font-semibold text-[#64748b] uppercase tracking-wider">
-              PRIMA · Visualisasi Anatomi (F6)
+              ANATOMIX · Visualisasi Anatomi (F6)
             </span>
             <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#eff6ff] text-[#0d6efd] font-bold border border-[#bfdbfe]">
               3D Atlas Medis

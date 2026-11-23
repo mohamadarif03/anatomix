@@ -31,10 +31,10 @@ export function usePwaInstall() {
         navigator.serviceWorker
           .register("/sw.js")
           .then((reg) => {
-            console.log("PRIMA SW registered:", reg.scope);
+            console.log("ANATOMIX SW registered:", reg.scope);
           })
           .catch((err) => {
-            console.warn("PRIMA SW registration failed:", err);
+            console.warn("ANATOMIX SW registration failed:", err);
           });
       }
 

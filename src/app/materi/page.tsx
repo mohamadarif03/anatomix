@@ -303,7 +303,7 @@ export default function MateriListPage() {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-[12px] font-semibold text-[#64748b] uppercase tracking-wider">
-              PRIMA · Kurikulum Anatomi
+              ANATOMIX · Kurikulum Anatomi
             </span>
             <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#eff6ff] text-[#0d6efd] font-bold border border-[#bfdbfe]">
               Fitur AI (F3)
@@ -342,7 +342,7 @@ export default function MateriListPage() {
               <span className="text-[10.5px] text-[#64748b] font-normal">· Ruang Belajar Pribadi</span>
             </div>
             <p className="text-[11.5px] text-[#64748b]">
-              PRIMA menjaga privasi diktat dan slide kuliahmu. Rangkuman dibuat oleh AI dan bisa mengandung kesalahan; selalu periksa dengan sumber utama.
+              ANATOMIX menjaga privasi diktat dan slide kuliahmu. Rangkuman dibuat oleh AI dan bisa mengandung kesalahan; selalu periksa dengan sumber utama.
             </p>
           </div>
         </div>

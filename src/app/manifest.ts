@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "PRIMA - Platform Review Interaktif Medis Adaptif",
-    short_name: "PRIMA",
+    name: "ANATOMIX - Platform Edukasi Anatomi 3D & Review Medis Adaptif",
+    short_name: "ANATOMIX",
     description: "Aplikasi pendamping belajar mandiri untuk mahasiswa kedokteran preklinik",
     start_url: "/beranda",
     display: "standalone",

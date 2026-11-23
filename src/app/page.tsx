@@ -82,7 +82,7 @@ interface FaqItem {
 const FAQ_ITEMS: FaqItem[] = [
   {
     id: "faq-1",
-    question: "Apakah materi anatomi di PRIMA sesuai dengan kurikulum Fakultas Kedokteran di Indonesia?",
+    question: "Apakah materi anatomi di ANATOMIX sesuai dengan kurikulum Fakultas Kedokteran di Indonesia?",
     answer:
       "Ya. Seluruh materi mengacu pada standar Terminologia Anatomica internasional dan silabus blok anatomi kurikulum kedokteran preklinik di Indonesia. Cakupan materi terbagi atas 6 regio tubuh standar: Caput, Collum, Thorax, Abdomen, Pelvis, dan Membrum lengkap dengan istilah Latin resmi.",
   },
@@ -90,7 +90,7 @@ const FAQ_ITEMS: FaqItem[] = [
     id: "faq-2",
     question: "Bagaimana cara kerja algoritma Spaced Repetition dalam menentukan jadwal review saya?",
     answer:
-      "PRIMA menggunakan algoritma spaced repetition terkalibrasi (FSR/SM-2) yang mencatat riwayat jawaban Anda. Struktur yang sering salah atau dinilai kritis otomatis dijadwalkan ulang lebih cepat (interval 1 hari atau 3 hari), sedangkan struktur yang stabil diingat diberi interval lebih panjang (7 hingga 14 hari) agar waktu belajar efisien.",
+      "ANATOMIX menggunakan algoritma spaced repetition terkalibrasi (FSR/SM-2) yang mencatat riwayat jawaban Anda. Struktur yang sering salah atau dinilai kritis otomatis dijadwalkan ulang lebih cepat (interval 1 hari atau 3 hari), sedangkan struktur yang stabil diingat diberi interval lebih panjang (7 hingga 14 hari) agar waktu belajar efisien.",
   },
   {
     id: "faq-3",
@@ -108,13 +108,13 @@ const FAQ_ITEMS: FaqItem[] = [
     id: "faq-5",
     question: "Apakah data kelemahan dan progres belajar saya tersimpan dengan aman?",
     answer:
-      "Ya. PRIMA menyimpan analitik perkembangan belajar dan peta kelemahan secara terstruktur agar Anda dapat selalu memantau regio mana yang membutuhkan perhatian lebih sebelum menghadapi ujian blok atau praktikum anatomi.",
+      "Ya. ANATOMIX menyimpan analitik perkembangan belajar dan peta kelemahan secara terstruktur agar Anda dapat selalu memantau regio mana yang membutuhkan perhatian lebih sebelum menghadapi ujian blok atau praktikum anatomi.",
   },
   {
     id: "faq-6",
-    question: "Apakah PRIMA dapat digunakan sebagai rujukan diagnosis atau penanganan klinis?",
+    question: "Apakah ANATOMIX dapat digunakan sebagai rujukan diagnosis atau penanganan klinis?",
     answer:
-      "Tidak. PRIMA secara tegas dirancang khusus sebagai alat bantu belajar (edukasi) dan media review materi mahasiswa kedokteran. Platform ini tidak boleh digunakan untuk keperluan diagnosis pasien, keputusan klinis, maupun saran medis profesional.",
+      "Tidak. ANATOMIX secara tegas dirancang khusus sebagai alat bantu belajar (edukasi) dan media review materi mahasiswa kedokteran. Platform ini tidak boleh digunakan untuk keperluan diagnosis pasien, keputusan klinis, maupun saran medis profesional.",
   },
 ];
 
@@ -865,7 +865,7 @@ export default function LandingPage() {
           ========================================================================= */}
       <main
         className="viewport"
-        aria-label="PRIMA — Platform Review Interaktif Medis Adaptif"
+        aria-label="ANATOMIX — Platform Edukasi Anatomi 3D & Review Medis Adaptif"
       >
         <div
           ref={stageRef}
@@ -876,11 +876,11 @@ export default function LandingPage() {
             <Link
               href="/"
               className="brand"
-              aria-label="PRIMA — Platform Review Interaktif Medis Adaptif"
+              aria-label="ANATOMIX — Platform Edukasi Anatomi 3D & Review Medis Adaptif"
             >
               <Image
                 src="/logo-horizontal.png"
-                alt="PRIMA"
+                alt="ANATOMIX"
                 width={145}
                 height={46}
                 className="h-[38px] sm:h-[42px] w-auto object-contain"
@@ -915,7 +915,7 @@ export default function LandingPage() {
 
             {/* Navigation Header Actions */}
             <div className="header-actions">
-              <a href="/beranda" className="join" aria-label="Masuk ke aplikasi PRIMA">
+              <a href="/beranda" className="join" aria-label="Masuk ke aplikasi ANATOMIX">
               <span className="join-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="22" height="22">
                   <circle
@@ -1002,7 +1002,7 @@ export default function LandingPage() {
                     />
                   </svg>
                 </span>
-                <span className="join-label">Masuk Aplikasi PRIMA</span>
+                <span className="join-label">Masuk Aplikasi ANATOMIX</span>
               </a>
             </div>
           </header>
@@ -1052,7 +1052,7 @@ export default function LandingPage() {
               </svg>
             </div>
             <div className="creator-copy">
-              <div>PRIMA MedTech</div>
+              <div>ANATOMIX MedTech</div>
               <div className="series">Modul Anatomi Kedokteran</div>
             </div>
           </div>
@@ -2195,7 +2195,7 @@ export default function LandingPage() {
           ========================================================================= */}
       <section
         id="faq"
-        aria-label="Pertanyaan yang sering ditanyakan seputar PRIMA"
+        aria-label="Pertanyaan yang sering ditanyakan seputar ANATOMIX"
       >
         {/* Giant Watermark */}
         <div className="faq-watermark" aria-hidden="true">
@@ -2209,7 +2209,7 @@ export default function LandingPage() {
               <span className="slash">/</span> Pertanyaan Umum
             </span>
             <h2 className="faq-headline">
-              Hal yang Sering Ditanyakan <strong>seputar PRIMA</strong>
+              Hal yang Sering Ditanyakan <strong>seputar ANATOMIX</strong>
             </h2>
             <p className="faq-subhead">
               Jawaban seputar kurikulum blok kedokteran, algoritma spaced repetition, spesifikasi teknis 3D, dan tujuan platform.
@@ -2227,7 +2227,7 @@ export default function LandingPage() {
                 </h3>
               </div>
               <p className="faq-summary-desc">
-                PRIMA mendampingi mahasiswa kedokteran menguasai ratusan struktur anatomi dan terminologi medis secara adaptif melalui visualisasi 3D spasial.
+                ANATOMIX mendampingi mahasiswa kedokteran menguasai ratusan struktur anatomi dan terminologi medis secara adaptif melalui visualisasi 3D spasial.
               </p>
 
               <div className="faq-facts-list">
@@ -2313,15 +2313,15 @@ export default function LandingPage() {
               <div className="flex items-center gap-2.5 mb-2">
                 <Image
                   src="/logo-square.png"
-                  alt="Logo PRIMA"
+                  alt="Logo ANATOMIX"
                   width={34}
                   height={34}
                   className="w-[34px] h-[34px] object-contain drop-shadow-sm"
                 />
-                <h3 className="text-xl font-extrabold text-white tracking-tight m-0">PRIMA</h3>
+                <h3 className="text-xl font-extrabold text-white tracking-tight m-0">ANATOMIX</h3>
               </div>
               <p>
-                Platform Review Interaktif Medis Adaptif. Pendamping belajar terstruktur untuk mahasiswa kedokteran preklinik dengan visualisasi anatomi 3D spasial dan spaced repetition otomatis.
+                Platform Edukasi Anatomi 3D & Review Medis Adaptif. Pendamping belajar terstruktur untuk mahasiswa kedokteran preklinik dengan visualisasi anatomi 3D spasial dan spaced repetition otomatis.
               </p>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs text-white/90">
                 <span>🏆 Karya Software Development</span>
@@ -2376,10 +2376,10 @@ export default function LandingPage() {
           {/* Bottom Row & Medical Disclaimer */}
           <div className="landing-footer-bottom">
             <p className="m-0">
-              PRIMA adalah alat bantu belajar (edukasi), bukan merupakan alat diagnosis atau saran medis klinis.
+              ANATOMIX adalah alat bantu belajar (edukasi), bukan merupakan alat diagnosis atau saran medis klinis.
             </p>
             <p className="m-0 text-[#94a3b8]">
-              © 2026 PRIMA MedTech · Seluruh hak cipta dilindungi.
+              © 2026 ANATOMIX MedTech · Seluruh hak cipta dilindungi.
             </p>
           </div>
         </div>

@@ -46,7 +46,7 @@ export const InstallModal: React.FC<InstallModalProps> = ({
             <div className="w-12 h-12 bg-white rounded-xl p-1.5 shadow-md flex items-center justify-center shrink-0">
               <Image
                 src="/icon.png"
-                alt="PRIMA Icon"
+                alt="ANATOMIX Icon"
                 width={40}
                 height={40}
                 className="w-full h-full object-contain"
@@ -57,7 +57,7 @@ export const InstallModal: React.FC<InstallModalProps> = ({
                 Progressive Web App (PWA)
               </span>
               <h2 id="pwa-modal-title" className="text-lg font-bold leading-tight">
-                Pasang Aplikasi PRIMA
+                Pasang Aplikasi ANATOMIX
               </h2>
             </div>
           </div>
@@ -161,7 +161,7 @@ export const InstallModal: React.FC<InstallModalProps> = ({
                     1
                   </span>
                   <span>
-                    Buka situs PRIMA menggunakan browser <strong>Safari</strong> di iPhone/iPad.
+                    Buka situs ANATOMIX menggunakan browser <strong>Safari</strong> di iPhone/iPad.
                   </span>
                 </div>
                 <div className="flex items-start gap-2.5">
@@ -206,7 +206,7 @@ export const InstallModal: React.FC<InstallModalProps> = ({
                     3
                   </span>
                   <span>
-                    Pilih <strong>&quot;Install&quot;</strong>. PRIMA akan terbuka di jendela tersendiri seperti aplikasi desktop native.
+                    Pilih <strong>&quot;Install&quot;</strong>. ANATOMIX akan terbuka di jendela tersendiri seperti aplikasi desktop native.
                   </span>
                 </div>
               </>

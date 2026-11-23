@@ -1,12 +1,12 @@
 # PRD: Pendamping Belajar Mahasiswa Kedokteran
 
-*Versi 1.1 • Kategori: Software Development • Nama produk: **PRIMA***
+*Versi 1.1 • Kategori: Software Development • Nama produk: **ANATOMIX***
 
 ---
 
 ## 1. Ringkasan dalam Satu Paragraf
 
-PRIMA (Platform Review Interaktif Medis Adaptif) adalah aplikasi web berbahasa Indonesia yang membantu mahasiswa kedokteran belajar dengan lebih terarah. Pada awal pemakaian, mahasiswa mengisi pengaturan (onboarding) tentang topik, tanggal ujian, dan waktu belajar. Berdasarkan itu, AI menyusun rencana belajar. Mahasiswa kemudian dapat mengunggah materi kuliah; AI merangkumnya, membuat latihan soal, dan membuat flashcard untuk istilah penting. Khusus anatomi, tersedia visualisasi 3D interaktif untuk membantu mahasiswa membayangkan letak dan bentuk struktur tubuh manusia.
+ANATOMIX (Platform Edukasi Anatomi 3D & Review Medis Adaptif) adalah aplikasi web berbahasa Indonesia yang membantu mahasiswa kedokteran belajar dengan lebih terarah. Pada awal pemakaian, mahasiswa mengisi pengaturan (onboarding) tentang topik, tanggal ujian, dan waktu belajar. Berdasarkan itu, AI menyusun rencana belajar. Mahasiswa kemudian dapat mengunggah materi kuliah; AI merangkumnya, membuat latihan soal, dan membuat flashcard untuk istilah penting. Khusus anatomi, tersedia visualisasi 3D interaktif untuk membantu mahasiswa membayangkan letak dan bentuk struktur tubuh manusia.
 
 ---
 
@@ -35,7 +35,7 @@ Rifqi, mahasiswa kedokteran tahun pertama, sangat bersemangat saat diterima. Beb
 | **Hambatan bahasa** | Banyak sumber belajar berbahasa Inggris |
 | **Stres dan kelelahan akademik** | Berkaitan dengan beban akademik dan kurangnya dukungan |
 
-**Yang akan dijawab PRIMA:** beban materi, manajemen waktu dan strategi belajar, hafalan istilah dan anatomi, latihan yang kurang interaktif, dan sebagian hambatan bahasa. **Yang tidak akan dijawab:** burnout secara klinis, keuangan, dan perbaikan kurikulum. Hal-hal ini membutuhkan solusi dari institusi dan ditulis sebagai batasan.
+**Yang akan dijawab ANATOMIX:** beban materi, manajemen waktu dan strategi belajar, hafalan istilah dan anatomi, latihan yang kurang interaktif, dan sebagian hambatan bahasa. **Yang tidak akan dijawab:** burnout secara klinis, keuangan, dan perbaikan kurikulum. Hal-hal ini membutuhkan solusi dari institusi dan ditulis sebagai batasan.
 
 ---
 
@@ -64,7 +64,7 @@ Rifqi, mahasiswa kedokteran tahun pertama, sangat bersemangat saat diterima. Beb
 
 ## 5. Cerita Penggunaan (User Story)
 
-> **Rifqi**, mahasiswa kedokteran semester awal, punya ujian anatomi dua minggu lagi. Saat pertama membuka PRIMA, ia mengisi onboarding: topik yang dipelajari (misalnya Thorax dan Membrum), tanggal ujian, dan waktu belajar per hari. AI menyusun rencana belajar harian untuknya. Ia lalu mengunggah slide kuliah; PRIMA merangkumnya, membuat latihan soal, dan membuat flashcard untuk istilah penting. Saat belajar anatomi, ia membuka visualisasi 3D untuk melihat letak dan bentuk struktur seperti *Arcus aortae* atau *M. Biceps brachii* sehingga lebih mudah membayangkannya.
+> **Rifqi**, mahasiswa kedokteran semester awal, punya ujian anatomi dua minggu lagi. Saat pertama membuka ANATOMIX, ia mengisi onboarding: topik yang dipelajari (misalnya Thorax dan Membrum), tanggal ujian, dan waktu belajar per hari. AI menyusun rencana belajar harian untuknya. Ia lalu mengunggah slide kuliah; ANATOMIX merangkumnya, membuat latihan soal, dan membuat flashcard untuk istilah penting. Saat belajar anatomi, ia membuka visualisasi 3D untuk melihat letak dan bentuk struktur seperti *Arcus aortae* atau *M. Biceps brachii* sehingga lebih mudah membayangkannya.
 
 ---
 
@@ -115,8 +115,8 @@ Rifqi, mahasiswa kedokteran tahun pertama, sangat bersemangat saat diterima. Beb
 
 ## 8. Hal yang Bukan Bagian dari Produk (Batasan)
 
-- PRIMA **bukan alat diagnosis** dan tidak memberi saran medis ke pasien.
-- PRIMA **tidak mengukur atau mendiagnosis burnout**.
+- ANATOMIX **bukan alat diagnosis** dan tidak memberi saran medis ke pasien.
+- ANATOMIX **tidak mengukur atau mendiagnosis burnout**.
 - **Rangkuman, soal, dan flashcard buatan AI adalah alat bantu** dan dapat mengandung kesalahan; mahasiswa tetap perlu memeriksanya dengan sumber utama (buku dan materi dosen).
 - Konten anatomi 3D diorganisasikan ke dalam **6 regio utama tubuh manusia** (Caput, Collum, Thorax, Abdomen, Pelvis, Membrum).
 - Sistem membantu belajar, **tidak menggantikan** praktikum dan bimbingan dosen.

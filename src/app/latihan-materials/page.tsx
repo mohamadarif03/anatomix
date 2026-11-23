@@ -367,7 +367,7 @@ function LatihanSoalContent() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-[12px] font-semibold text-[#64748b] uppercase tracking-wider">
-                  PRIMA · Fitur AI (F4)
+                  ANATOMIX · Fitur AI (F4)
                 </span>
                 <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#eff6ff] text-[#0d6efd] font-bold border border-[#bfdbfe]">
                   Generator Soal Adaptif
@@ -660,10 +660,10 @@ function LatihanSoalContent() {
                 )}
               </div>
 
-              {/* CATATAN STANDAR PRIMA */}
+              {/* CATATAN STANDAR ANATOMIX */}
               <div className="p-3.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-[8px] text-[11.5px] text-[#64748b] leading-relaxed">
                 <i className="bi bi-info-circle me-1.5 text-[#0d6efd]"></i>
-                PRIMA menyusun butir soal menggunakan istilah Latin medis baku dan kasus skenario klinis. Dibuat oleh AI dan dapat mengandung kesalahan.
+                ANATOMIX menyusun butir soal menggunakan istilah Latin medis baku dan kasus skenario klinis. Dibuat oleh AI dan dapat mengandung kesalahan.
               </div>
             </div>
           </div>
@@ -907,7 +907,7 @@ function LatihanSoalContent() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5 text-[12px] font-bold text-[#1e40af]">
                         <i className="bi bi-journal-medical text-[15px]"></i>
-                        <span>Pembahasan Medis PRIMA</span>
+                        <span>Pembahasan Medis ANATOMIX</span>
                       </div>
                       <Link
                         href={`/materi/${currentQuestion.materialSource.materialId}`}

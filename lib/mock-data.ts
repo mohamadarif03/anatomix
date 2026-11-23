@@ -1,4 +1,4 @@
-// Mock data terpusat untuk aplikasi PRIMA (Platform Review Interaktif Medis Adaptif)
+// Mock data terpusat untuk aplikasi ANATOMIX (Platform Edukasi Anatomi 3D & Review Medis Adaptif)
 // Seluruh materi diselaraskan dengan silabus Buku Petunjuk Praktikum Anatomi FK ULM
 // yang mencakup 3 Modul Utama (Muskuloskeletal, Respirasi, Kardiovaskuler) dan 6 Regio Tubuh.
 
@@ -3345,11 +3345,11 @@ export const mockAppearanceSettings: UserAppearanceSettings = {
 };
 
 export const mockAppInfoSettings: AppInfoSettings = {
-  name: "PRIMA (Platform Review Interaktif Medis Adaptif)",
+  name: "ANATOMIX (Platform Edukasi Anatomi 3D & Review Medis Adaptif)",
   version: "1.3.0",
   lastUpdated: "5 November 2026",
   disclaimer:
-    "PRIMA adalah alat bantu belajar, bukan alat diagnosis dan bukan pengganti dosen, praktikum, atau pasien nyata.",
+    "ANATOMIX adalah alat bantu belajar, bukan alat diagnosis dan bukan pengganti dosen, praktikum, atau pasien nyata.",
   attribution:
     "Model anatomi 3D diadaptasi dari 'Z-Anatomy, The libre 3D atlas of anatomy' (CC BY-SA 4.0) dan 'BodyParts3D, The Database Center for Life Science' (CC BY-SA 2.1 Japan). Model telah disederhanakan dan dipotong untuk keperluan aplikasi ini. Silabus praktikum mengacu pada Buku Petunjuk Praktikum Anatomi FK ULM.",
   techStack: [

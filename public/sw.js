@@ -1,5 +1,5 @@
-// PRIMA - Service Worker untuk Progressive Web App (PWA)
-const CACHE_NAME = "prima-pwa-v1";
+// ANATOMIX - Service Worker untuk Progressive Web App (PWA)
+const CACHE_NAME = "anatomix-pwa-v1";
 
 const STATIC_ASSETS = [
   "/",
@@ -73,7 +73,7 @@ self.addEventListener("fetch", (event) => {
           const fallback = await caches.match("/beranda");
           if (fallback) return fallback;
         }
-        return new Response("Offline - PRIMA", {
+        return new Response("Offline - ANATOMIX", {
           status: 503,
           statusText: "Service Unavailable",
           headers: new Headers({ "Content-Type": "text/plain" }),

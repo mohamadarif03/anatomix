@@ -71,7 +71,7 @@ const SETTINGS_TABS: SettingsTabItem[] = [
     name: "Tentang & Kredit",
     hash: "#tentang",
     icon: "bi bi-info-circle",
-    desc: "Versi PRIMA, atribusi 3D, dan lisensi medis",
+    desc: "Versi ANATOMIX, atribusi 3D, dan lisensi medis",
   },
 ];
 
@@ -284,7 +284,7 @@ export default function PengaturanPage() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `prima_data_studi_${profileForm.name.toLowerCase().replace(/[^a-z0-9]/g, "_")}.json`;
+    link.download = `anatomix_data_studi_${profileForm.name.toLowerCase().replace(/[^a-z0-9]/g, "_")}.json`;
     link.click();
     URL.revokeObjectURL(url);
     setToastMessage("Data studi berhasil diunduh sebagai file JSON");
@@ -422,7 +422,7 @@ export default function PengaturanPage() {
           <div className="p-3.5 m-2 bg-[#f8fafc] border border-[#e2e8f0] rounded-[6px] text-[11.5px] text-[#64748b] leading-relaxed">
             <div className="flex items-center gap-1.5 font-semibold text-[#1e293b] mb-1">
               <i className="bi bi-lightbulb text-[#f59e0b]"></i>
-              <span>Tips Belajar PRIMA</span>
+              <span>Tips Belajar ANATOMIX</span>
             </div>
             Ubah target harian secara bertahap. Konsistensi 20 item per hari lebih
             efektif daripada 100 item menjelang ujian blok.
@@ -700,7 +700,7 @@ export default function PengaturanPage() {
                         Hari Belajar Aktif Mingguan
                       </label>
                       <p className="text-[11.5px] text-[#64748b] mb-2.5">
-                        Pilih hari di mana PRIMA akan menyusun target harian
+                        Pilih hari di mana ANATOMIX akan menyusun target harian
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {DAYS_LIST.map((day) => {
@@ -1191,7 +1191,7 @@ export default function PengaturanPage() {
                         </span>
                       </div>
                       <p className="text-[12px] text-[#475569] leading-relaxed">
-                        PRIMA dirancang khusus untuk kenyamanan belajar mandiri
+                        ANATOMIX dirancang khusus untuk kenyamanan belajar mandiri
                         mahasiswa kedokteran. Seluruh catatan performa kuis, peta
                         kelemahan, dan target repetisi disimpan pada media lokal
                         peramban Anda. Aplikasi ini tidak mengumpulkan data pribadi
@@ -1262,7 +1262,7 @@ export default function PengaturanPage() {
                     <div className="flex items-start gap-4 pb-5 border-b border-[#f1f5f9]">
                       <Image
                         src="/logo-square.png"
-                        alt="Logo PRIMA"
+                        alt="Logo ANATOMIX"
                         width={52}
                         height={52}
                         className="w-[52px] h-[52px] object-contain rounded-[10px] drop-shadow-sm flex-shrink-0"
@@ -1277,7 +1277,7 @@ export default function PengaturanPage() {
                           </span>
                         </div>
                         <p className="text-[12px] text-[#475569] mt-1 leading-relaxed">
-                          PRIMA adalah aplikasi web pendamping belajar anatomi dan
+                          ANATOMIX adalah aplikasi web pendamping belajar anatomi dan
                           persiapan ujian preklinik mahasiswa kedokteran dengan
                           metode repetisi terdistribusi (*spaced repetition*) dan
                           eksplorasi model organ 3D interaktif.

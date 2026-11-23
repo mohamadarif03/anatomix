@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export const SESSION_COOKIE_NAME = "prima_session";
+export const SESSION_COOKIE_NAME = "anatomix_session";
 
 // Daftar rute publik yang tidak memerlukan login
 const PUBLIC_PATHS = ["/", "/masuk", "/favicon.ico", "/icon.png", "/apple-icon.png"];

@@ -269,7 +269,7 @@ function OnboardingContent() {
                 </span>
               </div>
               <p className="text-xs text-[#475569] mt-1 leading-relaxed">
-                Akun belajarmu telah siap digunakan. Silakan lengkapi 4 langkah pengaturan awal di bawah ini agar AI PRIMA dapat memetakan materi dan menyusun rencana belajar yang optimal untukmu.
+                Akun belajarmu telah siap digunakan. Silakan lengkapi 4 langkah pengaturan awal di bawah ini agar AI ANATOMIX dapat memetakan materi dan menyusun rencana belajar yang optimal untukmu.
               </p>
             </div>
           </div>
@@ -281,7 +281,7 @@ function OnboardingContent() {
             <div className="flex items-center gap-3">
               <Image
                 src="/logo-square.png"
-                alt="Logo PRIMA"
+                alt="Logo ANATOMIX"
                 width={44}
                 height={44}
                 className="w-11 h-11 object-contain drop-shadow-sm shrink-0"
@@ -297,7 +297,7 @@ function OnboardingContent() {
                   </span>
                 </div>
                 <p className="text-[13px] text-[#64748b] mt-0.5">
-                  Sesuaikan target dan jadwal Anda agar PRIMA dapat menyusun rencana belajar yang terarah.
+                  Sesuaikan target dan jadwal Anda agar ANATOMIX dapat menyusun rencana belajar yang terarah.
                 </p>
               </div>
             </div>
@@ -396,7 +396,7 @@ function OnboardingContent() {
                 Pilih Regio Anatomi yang Akan Dipelajari
               </h2>
               <p className="text-xs text-[#64748b] mt-0.5">
-                Anda dapat memilih satu atau lebih regio tubuh. PRIMA akan memfokuskan kuis, ringkasan, dan visualisasi 3D pada regio yang dipilih.
+                Anda dapat memilih satu atau lebih regio tubuh. ANATOMIX akan memfokuskan kuis, ringkasan, dan visualisasi 3D pada regio yang dipilih.
               </p>
             </div>
 
@@ -1013,7 +1013,7 @@ function OnboardingContent() {
       {/* Footer Standalone Onboarding */}
       <footer className="relative z-10 py-4 px-6 border-t border-slate-200/60 bg-white/70 backdrop-blur-xs text-center text-xs text-[#64748b]">
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>&copy; {new Date().getFullYear()} PRIMA &mdash; Platform Review Interaktif Medis Adaptif.</span>
+          <span>&copy; {new Date().getFullYear()} ANATOMIX &mdash; Platform Edukasi Anatomi 3D & Review Medis Adaptif.</span>
           <div className="flex items-center gap-2 text-[11px] text-[#64748b]">
             <i className="bi bi-robot text-blue-600"></i>
             <span>Rencana disusun oleh AI sebagai alat bantu belajar</span>
@@ -1034,7 +1034,7 @@ function OnboardingContent() {
               Menyusun Rencana Belajar Adaptif
             </h3>
             <p className="text-xs text-[#64748b] mb-4">
-              AI PRIMA sedang memproses data pengaturan Anda...
+              AI ANATOMIX sedang memproses data pengaturan Anda...
             </p>
 
             {/* Pesan Tahapan AI */}

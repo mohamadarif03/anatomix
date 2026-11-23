@@ -900,7 +900,7 @@ export default function RencanaBelajarPage() {
               Menyusun Ulang Rencana Belajar
             </h3>
             <p className="text-xs text-[#64748b] mb-4">
-              AI PRIMA sedang menghitung ulang alokasi jadwal dan target harian...
+              AI ANATOMIX sedang menghitung ulang alokasi jadwal dan target harian...
             </p>
 
             {/* Pesan Tahapan AI */}

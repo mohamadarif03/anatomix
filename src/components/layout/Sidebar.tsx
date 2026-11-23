@@ -114,7 +114,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <nav className="flex flex-col">
         {/* FITUR MEDIS SECTION */}
         <div className="px-6 pt-2 pb-1.5 text-[10.5px] font-bold uppercase tracking-wider text-[#475569]">
-          MENU PRIMA
+          MENU ANATOMIX
         </div>
 
         {mainNavItems.map((item) => {
@@ -178,7 +178,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <div className="flex items-center gap-2 min-w-0">
               <i className="bi bi-phone-fill text-[15px] text-emerald-600"></i>
               <div className="min-w-0">
-                <div className="text-[11.5px] font-bold leading-tight truncate">PRIMA Terpasang</div>
+                <div className="text-[11.5px] font-bold leading-tight truncate">ANATOMIX Terpasang</div>
                 <div className="text-[10px] text-emerald-600 truncate">Mode PWA Aktif</div>
               </div>
             </div>
@@ -193,7 +193,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onCloseMobile();
             }}
             className="w-full p-2.5 bg-gradient-to-r from-blue-50 to-indigo-50/70 hover:from-blue-100 hover:to-indigo-100 border border-blue-200/80 rounded-[8px] flex items-center justify-between text-[#0d6efd] transition-all group shadow-2xs text-left cursor-pointer"
-            title="Install PRIMA ke Layar Utama (PWA)"
+            title="Install ANATOMIX ke Layar Utama (PWA)"
           >
             <div className="flex items-center gap-2.5 min-w-0">
               <div className="w-7 h-7 rounded-md bg-[#0d6efd] text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
@@ -272,7 +272,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <Link href="/beranda" onClick={onCloseMobile} className="flex items-center no-underline">
                 <Image
                   src="/logo-horizontal.png"
-                  alt="PRIMA"
+                  alt="ANATOMIX"
                   width={130}
                   height={40}
                   className="h-[34px] w-auto object-contain"

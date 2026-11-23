@@ -50,7 +50,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
 
           {/* Desktop Footer */}
           <footer className="hidden md:flex mt-auto border-t border-[#e2e8f0] bg-[#f8f9fa] px-6 py-4 flex-col sm:flex-row items-center justify-between text-[12.5px] text-[#475569]">
-            <div>© 2026 PRIMA • Platform Review Interaktif Medis Adaptif</div>
+            <div>© 2026 ANATOMIX • Platform Edukasi Anatomi 3D & Review Medis Adaptif</div>
             <div className="mt-1 sm:mt-0 text-center sm:text-right">
               Alat bantu belajar mandiri mahasiswa kedokteran preklinik · Bukan alat diagnosis klinis
             </div>

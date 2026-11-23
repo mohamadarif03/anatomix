@@ -2,8 +2,8 @@ import crypto from "node:crypto";
 import { cookies } from "next/headers";
 import { prisma } from "./prisma";
 
-const AUTH_SECRET = process.env.NEXTAUTH_SECRET || "prima-fallback-secret-key-321-medical";
-export const SESSION_COOKIE_NAME = "prima_session";
+const AUTH_SECRET = process.env.NEXTAUTH_SECRET || "anatomix-fallback-secret-key-321-medical";
+export const SESSION_COOKIE_NAME = "anatomix_session";
 const SESSION_MAX_AGE_SECONDS = 7 * 24 * 60 * 60; // 7 hari
 
 export interface SessionPayload {

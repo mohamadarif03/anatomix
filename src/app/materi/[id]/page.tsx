@@ -84,7 +84,7 @@ export default function MateriDetailPage() {
       .map((k) => `• ${k.term} (${k.latin}): ${k.definition}`)
       .join("\n")}${
       sub.clinicalCorrelation ? `\n\nKorelasi Klinis:\n${sub.clinicalCorrelation}` : ""
-    }\n\n[Dibuat oleh PRIMA AI - Periksa dengan sumber utama]`;
+    }\n\n[Dibuat oleh ANATOMIX AI - Periksa dengan sumber utama]`;
 
     if (navigator?.clipboard?.writeText) {
       navigator.clipboard.writeText(textToCopy);
@@ -108,7 +108,7 @@ export default function MateriDetailPage() {
         <div className="bg-white border border-[#e2e8f0] rounded-[8px] p-8 mt-6">
           <EmptyState
             title="Materi Tidak Ditemukan"
-            description="Materi kuliah dengan ID tersebut tidak ditemukan di basis data lokal PRIMA."
+            description="Materi kuliah dengan ID tersebut tidak ditemukan di basis data lokal ANATOMIX."
             action={
               <Link
                 href="/materi"
@@ -478,13 +478,13 @@ export default function MateriDetailPage() {
                     "Memuat cuplikan dokumen kuliah dari arsip berkas mahasiswa..."}
                 </p>
                 <div className="mt-3 p-2 bg-white/70 border border-[#e2e8f0] rounded text-[11px] text-[#64748b] italic">
-                  [Tampilan halaman disederhanakan untuk kebutuhan demo aplikasi PRIMA]
+                  [Tampilan halaman disederhanakan untuk kebutuhan demo aplikasi ANATOMIX]
                 </div>
               </div>
 
               {/* Footer Dokumen Mock */}
               <div className="pt-2 border-t border-[#e2e8f0] flex items-center justify-between text-[10.5px] text-[#94a3b8]">
-                <span>PRIMA Reader Engine v1.1</span>
+                <span>ANATOMIX Reader Engine v1.1</span>
                 <span>{material.fileName}</span>
               </div>
             </div>
@@ -647,7 +647,7 @@ export default function MateriDetailPage() {
               </div>
 
               <div className="p-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-[6px] text-[11px] text-[#64748b]">
-                Laporan ini akan ditinjau oleh tim kurikulum medis PRIMA dan dosen pembina untuk memperbarui model rangkuman AI.
+                Laporan ini akan ditinjau oleh tim kurikulum medis ANATOMIX dan dosen pembina untuk memperbarui model rangkuman AI.
               </div>
 
               <div className="flex items-center justify-end gap-2 pt-2">

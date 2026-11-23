@@ -21,13 +21,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "PRIMA - Platform Review Interaktif Medis Adaptif",
+  title: "ANATOMIX - Platform Edukasi Anatomi 3D & Review Medis Adaptif",
   description: "Aplikasi pendamping belajar mandiri untuk mahasiswa kedokteran preklinik",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "PRIMA",
+    title: "ANATOMIX",
   },
   icons: {
     icon: [

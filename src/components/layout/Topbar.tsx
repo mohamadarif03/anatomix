@@ -21,7 +21,7 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
           <Link href="/beranda" className="flex items-center no-underline group py-1">
             <Image
               src="/logo-horizontal.png"
-              alt="PRIMA"
+              alt="ANATOMIX"
               width={140}
               height={44}
               className="h-[32px] sm:h-[38px] w-auto object-contain group-hover:opacity-90 transition-opacity"
