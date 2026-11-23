@@ -286,13 +286,16 @@ function MasukContent() {
               <Link href="/" className="inline-flex flex-col items-start gap-1 group focus:outline-none focus:ring-2 focus:ring-[#0d6efd] rounded-lg">
                 <div className="flex items-center gap-2.5">
                   <Image
-                    src="/logo-horizontal.png"
-                    alt="ANATOMIX"
-                    width={165}
-                    height={52}
-                    className="h-[44px] sm:h-[48px] w-auto object-contain group-hover:opacity-90 transition-opacity"
+                    src="/anatomix-logo.png"
+                    alt="Logo ANATOMIX"
+                    width={44}
+                    height={44}
+                    className="h-[38px] w-[38px] sm:h-[42px] sm:w-[42px] object-contain drop-shadow-xs group-hover:scale-105 transition-transform shrink-0"
                     priority
                   />
+                  <span className="text-[22px] sm:text-[24px] font-black tracking-tight text-[#0f4cd6] leading-none">
+                    ANATOMIX
+                  </span>
                   <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-50 text-[#0d6efd] border border-blue-200/60">
                     Preklinik
                   </span>

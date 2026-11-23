@@ -1,11 +1,13 @@
 // ANATOMIX - Service Worker untuk Progressive Web App (PWA)
-const CACHE_NAME = "anatomix-pwa-v1";
+const CACHE_NAME = "anatomix-pwa-v2";
 
 const STATIC_ASSETS = [
   "/",
   "/beranda",
   "/icon.png",
   "/apple-icon.png",
+  "/anatomix-logo.png",
+  "/logo-square.png",
   "/logo-horizontal.png",
   "/logo.png",
   "/manifest.webmanifest",

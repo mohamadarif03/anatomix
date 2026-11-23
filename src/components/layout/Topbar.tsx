@@ -18,15 +18,18 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
       {/* Left: Brand & Hamburger */}
       <div className="flex items-center">
         <div className="flex items-center gap-2 sm:gap-4 md:w-[214px] md:justify-between pr-2 sm:pr-3">
-          <Link href="/beranda" className="flex items-center no-underline group py-1">
+          <Link href="/beranda" className="flex items-center gap-2 no-underline group py-1">
             <Image
-              src="/logo-horizontal.png"
-              alt="ANATOMIX"
-              width={140}
-              height={44}
-              className="h-[32px] sm:h-[38px] w-auto object-contain group-hover:opacity-90 transition-opacity"
+              src="/anatomix-logo.png"
+              alt="Logo ANATOMIX"
+              width={36}
+              height={36}
+              className="h-[32px] w-[32px] sm:h-[36px] sm:w-[36px] object-contain drop-shadow-xs group-hover:scale-105 transition-transform shrink-0"
               priority
             />
+            <span className="text-[17px] sm:text-[19px] font-black tracking-tight text-[#0f4cd6] leading-none">
+              ANATOMIX
+            </span>
           </Link>
           <button
             onClick={onToggleSidebar}

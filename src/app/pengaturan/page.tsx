@@ -1261,7 +1261,7 @@ export default function PengaturanPage() {
                     {/* App Header & Bio */}
                     <div className="flex items-start gap-4 pb-5 border-b border-[#f1f5f9]">
                       <Image
-                        src="/logo-square.png"
+                        src="/anatomix-logo.png"
                         alt="Logo ANATOMIX"
                         width={52}
                         height={52}

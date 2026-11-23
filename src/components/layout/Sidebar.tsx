@@ -269,14 +269,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
         >
           <aside className="w-full h-full bg-white border-r border-[#e5e7eb] select-none pt-4 pb-8 flex flex-col justify-between overflow-y-auto shadow-2xl">
             <div className="px-6 pb-3 border-b border-[#f1f5f9] flex items-center justify-between">
-              <Link href="/beranda" onClick={onCloseMobile} className="flex items-center no-underline">
+              <Link href="/beranda" onClick={onCloseMobile} className="flex items-center gap-2.5 no-underline">
                 <Image
-                  src="/logo-horizontal.png"
-                  alt="ANATOMIX"
-                  width={130}
-                  height={40}
-                  className="h-[34px] w-auto object-contain"
+                  src="/anatomix-logo.png"
+                  alt="Logo ANATOMIX"
+                  width={36}
+                  height={36}
+                  className="h-[32px] w-[32px] object-contain drop-shadow-xs shrink-0"
                 />
+                <span className="text-[18px] font-black tracking-tight text-[#0f4cd6] leading-none">
+                  ANATOMIX
+                </span>
               </Link>
               <button
                 onClick={onCloseMobile}

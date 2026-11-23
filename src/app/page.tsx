@@ -879,13 +879,16 @@ export default function LandingPage() {
               aria-label="ANATOMIX — Platform Edukasi Anatomi 3D & Review Medis Adaptif"
             >
               <Image
-                src="/logo-horizontal.png"
-                alt="ANATOMIX"
-                width={145}
-                height={46}
-                className="h-[38px] sm:h-[42px] w-auto object-contain"
+                src="/anatomix-logo.png"
+                alt="Logo ANATOMIX"
+                width={42}
+                height={42}
+                className="h-[36px] w-[36px] sm:h-[40px] sm:w-[40px] object-contain drop-shadow-sm shrink-0"
                 priority
               />
+              <span className="brand-text font-black tracking-tight text-[#0f4cd6]">
+                ANATOMIX
+              </span>
 
             </Link>
 
@@ -2312,7 +2315,7 @@ export default function LandingPage() {
             <div className="landing-footer-brand">
               <div className="flex items-center gap-2.5 mb-2">
                 <Image
-                  src="/logo-square.png"
+                  src="/anatomix-logo.png"
                   alt="Logo ANATOMIX"
                   width={34}
                   height={34}
