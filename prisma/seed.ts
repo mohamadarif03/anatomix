@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { hashPassword } from "../lib/auth";
 import {
   mockUserProfile,
   mockMaterials,
@@ -33,7 +34,7 @@ async function main() {
       id: "usr-rina-01",
       email: mockUserProfile.email || "rina@fk.ac.id",
       name: mockUserProfile.name || "dr. Rina Safitri (Kandidat)",
-      passwordHash: "$2a$10$wE9sIUk7q8VdGfPzM0y6lO7yYqJz3iQcKm3x2jZ8L9a1B2c3D4e5F", // demo dummy hash
+      passwordHash: hashPassword("password123"),
       institution: mockUserProfile.institution || "Fakultas Kedokteran ULM",
       semester: mockUserProfile.semester || 3,
     },

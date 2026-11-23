@@ -98,7 +98,7 @@ function MasukContent() {
   }
 
   // Handle Form Submit: Masuk
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormGeneralError(null);
     const newErrors: Record<string, string> = {};
@@ -125,30 +125,37 @@ function MasukContent() {
     }
 
     setErrors({});
-
-    // Sesuai aturan: Simulasi galat jika email salah@contoh.com
-    if (email.trim().toLowerCase() === "salah@contoh.com") {
-      setIsLoading(true);
-      setLoadingMessage("Memverifikasi kredensial...");
-      setTimeout(() => {
-        setIsLoading(false);
-        setFormGeneralError("Email atau kata sandi tidak cocok. Silakan coba lagi.");
-        passwordRef.current?.focus();
-      }, 1200);
-      return;
-    }
-
-    // Simulasi loading 1.5 detik lalu arahkan ke /beranda
     setIsLoading(true);
     setLoadingMessage("Masuk ke akun Anda...");
-    setTimeout(() => {
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        setIsLoading(false);
+        setFormGeneralError(data.message || "Email atau kata sandi tidak cocok. Silakan coba lagi.");
+        passwordRef.current?.focus();
+        return;
+      }
+
       setIsLoading(false);
-      router.push("/beranda");
-    }, 1500);
+      const redirectUrl = searchParams.get("from") || "/beranda";
+      router.push(redirectUrl);
+      router.refresh();
+    } catch {
+      setIsLoading(false);
+      setFormGeneralError("Gagal menghubungi server. Periksa koneksi internet Anda.");
+    }
   };
 
   // Handle Form Submit: Daftar
-  const handleRegisterSubmit = (e: React.FormEvent) => {
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormGeneralError(null);
     const newErrors: Record<string, string> = {};
@@ -197,17 +204,41 @@ function MasukContent() {
     }
 
     setErrors({});
-
-    // Simulasi pendaftaran 1.5 detik lalu arahkan ke /onboarding
     setIsLoading(true);
     setLoadingMessage("Mempersiapkan profil belajarmu...");
-    setTimeout(() => {
+
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName.trim(),
+          email: email.trim(),
+          password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        setIsLoading(false);
+        setFormGeneralError(data.message || "Pendaftaran gagal. Silakan coba lagi.");
+        if (data.message?.toLowerCase().includes("email")) {
+          emailRef.current?.focus();
+        }
+        return;
+      }
+
       setIsLoading(false);
       const targetUrl = fullName.trim()
         ? `/onboarding?registered=true&name=${encodeURIComponent(fullName.trim())}`
         : "/onboarding?registered=true";
       router.push(targetUrl);
-    }, 1500);
+      router.refresh();
+    } catch {
+      setIsLoading(false);
+      setFormGeneralError("Gagal menghubungi server. Periksa koneksi internet Anda.");
+    }
   };
 
   // Handle Forgot Password modal submission
