@@ -202,23 +202,37 @@ function OnboardingContent() {
     }
   };
 
-  // Eksekusi buat rencana belajar (Simulasi AI ~3 detik)
-  const handleCreatePlan = () => {
+  // Eksekusi buat rencana belajar (AI & Database)
+  const handleCreatePlan = async () => {
     setIsGenerating(true);
     setLoadingMessage("Menganalisis jadwal dan tanggal ujian...");
 
-    setTimeout(() => {
-      setLoadingMessage("Memetakan subtopik regio dan target materi harian...");
-    }, 1100);
+    try {
+      // 1. Simpan preferensi onboarding ke database
+      await fetch("/api/onboarding", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    setTimeout(() => {
-      setLoadingMessage("Menyusun rencana belajar adaptif dan latihan 3D...");
-    }, 2200);
+      setLoadingMessage("Menyusun rencana belajar adaptif oleh AI...");
 
-    setTimeout(() => {
+      // 2. Generate rencana belajar AI ke database
+      await fetch("/api/planner/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      setLoadingMessage("Mempersiapkan dasbor belajarmu...");
+      setTimeout(() => {
+        setIsGenerating(false);
+        router.push("/perencana");
+      }, 700);
+    } catch (err) {
+      console.error("Gagal menyusun rencana:", err);
       setIsGenerating(false);
       router.push("/beranda");
-    }, 3300);
+    }
   };
 
   // Info langkah wizard

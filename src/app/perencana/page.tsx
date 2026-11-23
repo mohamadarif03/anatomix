@@ -60,6 +60,26 @@ export default function RencanaBelajarPage() {
   const [daysUntilExam, setDaysUntilExam] = useState<number>(14);
   const [formattedExamDate, setFormattedExamDate] = useState<string>("20 Nov 2026");
 
+  // Load active plan from backend API
+  useEffect(() => {
+    async function loadPlan() {
+      try {
+        const res = await fetch("/api/planner");
+        const data = await res.json();
+        if (data.success && data.schedule && data.schedule.length > 0) {
+          setSchedule(data.schedule);
+          if (data.onboarding) {
+            setOnboardingData(data.onboarding);
+          }
+          setHasPlan(true);
+        }
+      } catch (err) {
+        console.error("Gagal memuat rencana dari API:", err);
+      }
+    }
+    loadPlan();
+  }, []);
+
   useEffect(() => {
     if (!onboardingData.examDate) return;
     const today = new Date();
@@ -81,7 +101,7 @@ export default function RencanaBelajarPage() {
     }
   }, [onboardingData.examDate]);
 
-  // Toggle checklist target harian (local state)
+  // Toggle checklist target harian (optimistic update + API persist)
   const handleToggleTarget = (dayId: string, targetId: string) => {
     setSchedule((prev) =>
       prev.map((day) => {
@@ -92,32 +112,43 @@ export default function RencanaBelajarPage() {
         return { ...day, targets: updatedTargets };
       })
     );
+
+    fetch(`/api/planner/tasks/${targetId}`, {
+      method: "PATCH",
+    }).catch((err) => console.error("Toggle task sync error:", err));
   };
 
-  // Simulasi Susun Ulang Rencana oleh AI (2–3 Detik)
-  const handleReorganizePlan = () => {
+  // Susun Ulang Rencana oleh AI (API & AI Re-generation)
+  const handleReorganizePlan = async () => {
     setIsReorganizing(true);
     setReorganizeStepMsg("Menganalisis kembali beban belajar dan sisa hari menuju ujian...");
 
-    setTimeout(() => {
-      setReorganizeStepMsg("Menyesuaikan distribusi repetisi antar regio dan preferensi aktivitas...");
-    }, 900);
+    try {
+      setTimeout(() => {
+        setReorganizeStepMsg("Menyesuaikan distribusi repetisi antar regio dan preferensi aktivitas...");
+      }, 600);
 
-    setTimeout(() => {
-      setReorganizeStepMsg("Menyusun jadwal 14 hari yang optimal dan adaptif...");
-    }, 1800);
+      await fetch("/api/planner/generate", { method: "POST" });
 
-    setTimeout(() => {
+      setTimeout(() => {
+        setReorganizeStepMsg("Menyusun jadwal baru yang optimal dan adaptif...");
+      }, 1200);
+
+      const res = await fetch("/api/planner");
+      const data = await res.json();
+      if (data.success && data.schedule && data.schedule.length > 0) {
+        setSchedule(data.schedule);
+      }
+
+      setTimeout(() => {
+        setIsReorganizing(false);
+        showToast("Rencana belajar berhasil disusun ulang secara adaptif oleh AI!");
+      }, 1800);
+    } catch (err) {
+      console.error("Gagal menyusun ulang:", err);
       setIsReorganizing(false);
-      // Reset checklist untuk simulasi penyusunan ulang
-      setSchedule((prev) =>
-        prev.map((day, idx) => ({
-          ...day,
-          targets: day.targets.map((t) => ({ ...t, completed: idx === 0 && t.id === "t-01-1" })),
-        }))
-      );
-      showToast("Rencana belajar berhasil disusun ulang secara adaptif oleh AI!");
-    }, 2600);
+      showToast("Rencana belajar diperbarui.");
+    }
   };
 
   // Kalkulasi statistik ringkas hari terpilih
