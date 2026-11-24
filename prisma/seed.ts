@@ -41,6 +41,29 @@ async function main() {
   });
   console.log(`✅ User dibuat: ${demoUser.name} (${demoUser.email})`);
 
+  // 2b. Buat Akun Demo Cepat untuk Evaluator / Juri
+  const demoEvaluator = await prisma.user.create({
+    data: {
+      id: "usr-demo-01",
+      email: "demo@prima.med.id",
+      name: "dr. Rina Safitri (Akun Demo Evaluator)",
+      passwordHash: hashPassword("password123"),
+      institution: "Fakultas Kedokteran ULM",
+      semester: 3,
+    },
+  });
+  await prisma.studyProfile.create({
+    data: {
+      userId: demoEvaluator.id,
+      targetExam: "Ujian Blok Anatomi Regio Caput & Thorax",
+      examDate: new Date("2026-12-15"),
+      dailyHours: 2.0,
+      focusRegions: JSON.stringify(["Caput", "Collum", "Thorax"]),
+      learningStyle: "Visual & 3D Interactive",
+    },
+  });
+  console.log(`✅ User demo dibuat: ${demoEvaluator.name} (${demoEvaluator.email})`);
+
   // 3. Buat StudyProfile & Rencana Belajar
   await prisma.studyProfile.create({
     data: {

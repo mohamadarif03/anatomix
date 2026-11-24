@@ -40,6 +40,18 @@ function MasukContent() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formGeneralError, setFormGeneralError] = useState<string | null>(null);
 
+  // Demo account filled state
+  const [demoFilled, setDemoFilled] = useState(false);
+
+  const fillDemoAccount = () => {
+    setEmail("demo@prima.med.id");
+    setPassword("password123");
+    setErrors({});
+    setFormGeneralError(null);
+    setDemoFilled(true);
+    setTimeout(() => setDemoFilled(false), 2500);
+  };
+
   // Loading state
   const [isLoading, setIsLoading] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("");
@@ -432,6 +444,51 @@ function MasukContent() {
                     <p className="text-xs text-[#64748b] mt-0.5">
                       Masuk untuk melanjutkan rencana dan progres belajarmu.
                     </p>
+                  </div>
+
+                  {/* Kartu Khusus Akun Demo untuk Juri / Evaluator Lomba */}
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-br from-blue-50/90 to-indigo-50/70 border border-blue-200/80 shadow-xs">
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm text-[#0d6efd]">
+                        <i className="bi bi-person-badge-fill text-sm"></i>
+                        <span>Akun Demo Evaluator / Juri</span>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-full bg-blue-100 text-[#0d6efd] text-[10px] font-semibold tracking-wide">
+                        Demo Ready
+                      </span>
+                    </div>
+
+                    <p className="text-[11px] text-[#475569] leading-relaxed mb-3">
+                      Ingin langsung mencoba tanpa mendaftar? Gunakan kredensial demo berikut yang sudah terisi data kurikulum, atlas 3D, dan riwayat belajar:
+                    </p>
+
+                    <div className="bg-white/95 rounded-lg border border-blue-100 p-2.5 space-y-1.5 font-mono text-[11px]">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[#64748b] font-sans font-medium text-[11px]">Email:</span>
+                        <span className="font-semibold text-[#0f172a] select-all bg-slate-50 px-1.5 py-0.5 rounded">
+                          demo@prima.med.id
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-[#64748b] font-sans font-medium text-[11px]">Kata Sandi:</span>
+                        <span className="font-semibold text-[#0f172a] select-all bg-slate-50 px-1.5 py-0.5 rounded">
+                          password123
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={fillDemoAccount}
+                      className={`mt-3 w-full py-2 px-3 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-all duration-200 shadow-xs ${
+                        demoFilled
+                          ? "bg-emerald-600 text-white"
+                          : "bg-[#0d6efd] hover:bg-blue-700 active:scale-[0.99] text-white"
+                      }`}
+                    >
+                      <i className={`bi ${demoFilled ? "bi-check-circle-fill" : "bi-box-arrow-in-right"} text-sm`}></i>
+                      <span>{demoFilled ? "Formulir Berhasil Diisi!" : "Gunakan Akun Demo Ini (1-Klik Isi)"}</span>
+                    </button>
                   </div>
 
                   {/* Input Email */}
